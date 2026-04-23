@@ -1,7 +1,6 @@
+import { redirect } from "next/navigation";
+
+// TEMPORARY: redirect to mentors.html (to be removed in ~1 month)
 export default function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-black">
-      <h1 className="text-5xl font-bold text-white">challenge</h1>
-    </div>
-  );
+  redirect("/mentors.html");
 }
