@@ -9,66 +9,169 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --dark:#0A0F14;
-  --card:#111920;
-  --border:#1E2D38;
   --green:#1DB954;
+  --green-light:#5DBF80;
   --green-dim:#16903F;
-  --white:#F0F4F8;
-  --gray:#6B8A9E;
-  --light-bg:#F4F7FA;
+  --light-bg:#F8FAFC;
   --light-card:#FFFFFF;
-  --light-border:#E0E8EF;
+  --light-border:#E2E8F0;
+  --text:#0F172A;
+  --text-muted:#64748B;
 }
-body{font-family:'Inter',sans-serif;background:var(--light-bg);color:#1A2730;min-height:100vh}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:#fff;border-bottom:1px solid var(--light-border);position:sticky;top:0;z-index:100}
-.back{display:inline-flex;align-items:center;gap:8px;color:#6B8A9E;text-decoration:none;font-size:.85rem;font-weight:600;transition:color .15s}
-.back:hover{color:var(--green)}
-.brand{font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#0A0F14}
-.brand span{color:var(--green)}
-.main{max-width:860px;margin:0 auto;padding:40px 24px 80px}
-.section{margin-bottom:56px;scroll-margin-top:70px}
-.section-header{display:flex;align-items:center;gap:14px;margin-bottom:24px}
-.section-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.section-title{font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#0A0F14}
-.faq-item{background:#fff;border:1px solid var(--light-border);border-radius:12px;margin-bottom:8px;overflow:hidden;transition:box-shadow .2s}
-.faq-item:hover{box-shadow:0 4px 16px rgba(0,0,0,.07)}
-.faq-item.open{border-color:#1DB95440;box-shadow:0 0 0 3px #1DB95410}
-.faq-q{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;cursor:pointer;user-select:none}
-.faq-num{font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;color:var(--green);min-width:28px;padding-top:1px;letter-spacing:.04em}
-.faq-qtext{font-size:.9rem;font-weight:600;color:#1A2730;flex:1;line-height:1.45}
-.faq-arrow{font-size:14px;color:#6B8A9E;transition:transform .2s;flex-shrink:0;padding-top:2px}
-.faq-item.open .faq-arrow{transform:rotate(90deg);color:var(--green)}
-.faq-a{display:none;padding:0 18px 18px 60px;font-size:.875rem;line-height:1.7;color:#3A5060;border-top:1px solid #F0F4F8}
-.faq-item.open .faq-a{display:block;padding-top:14px}
-.faq-a strong{color:#1A2730;font-weight:600}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--light-bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* ── HERO ── */
+.hero{position:relative;background:linear-gradient(135deg,#0A0F14 0%,#0F1923 100%);color:#fff;padding:64px 28px 56px;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(29,185,84,.18),transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 80%,rgba(29,185,84,.08) 0,transparent 40%),radial-gradient(circle at 80% 20%,rgba(93,191,128,.06) 0,transparent 40%);pointer-events:none}
+.hero-back{position:absolute;top:20px;left:24px;display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.5);text-decoration:none;font-size:.78rem;font-weight:600;transition:all .15s;z-index:2}
+.hero-back:hover{color:var(--green);transform:translateX(-3px)}
+.hero-content{position:relative;z-index:1;max-width:760px;margin:0 auto;text-align:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(29,185,84,.12);border:1px solid rgba(29,185,84,.3);color:var(--green);font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;border-radius:50px;margin-bottom:18px}
+.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-family:'Montserrat',sans-serif;font-size:3rem;font-weight:900;letter-spacing:-.02em;line-height:1.05;background:linear-gradient(135deg,#fff 30%,#5DBF80 100%);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:14px}
+.hero p{font-size:.95rem;color:rgba(255,255,255,.6);max-width:540px;margin:0 auto;line-height:1.6}
+.hero-stats{display:flex;justify-content:center;gap:36px;margin-top:32px;flex-wrap:wrap}
+.hstat{text-align:center}
+.hstat-n{font-family:'Montserrat',sans-serif;font-size:1.6rem;font-weight:800;color:var(--green);line-height:1}
+.hstat-l{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-top:4px}
+
+/* ── STICKY SEARCH + NAV ── */
+.sticky-bar{position:sticky;top:0;z-index:50;background:rgba(248,250,252,.85);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--light-border);padding:14px 24px}
+.sticky-inner{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.search-wrap{position:relative}
+.search-input{width:100%;padding:14px 50px 14px 50px;border:1.5px solid var(--light-border);border-radius:14px;font-size:.95rem;font-family:'Inter',sans-serif;outline:none;background:#fff;color:var(--text);transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.search-input:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(29,185,84,.12)}
+.search-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--text-muted);width:18px;height:18px;pointer-events:none}
+.search-clear{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:24px;height:24px;border:none;background:#E2E8F0;color:#64748B;border-radius:50%;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:13px;transition:all .15s}
+.search-clear:hover{background:#CBD5E1;color:#0F172A}
+.search-clear.show{display:flex}
+.search-meta{display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--text-muted);min-height:18px}
+.search-meta strong{color:var(--green);font-weight:700}
+
+.nav-pills{display:flex;gap:6px;overflow-x:auto;padding:2px 0;scrollbar-width:none}
+.nav-pills::-webkit-scrollbar{display:none}
+.nav-pill{flex-shrink:0;display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;letter-spacing:.04em;padding:7px 13px;border-radius:50px;cursor:pointer;border:1.5px solid var(--light-border);color:var(--text-muted);background:#fff;text-decoration:none;transition:all .18s}
+.nav-pill:hover{border-color:var(--green);color:var(--green);transform:translateY(-1px)}
+.nav-pill .pill-count{background:#F1F5F9;color:var(--text-muted);font-size:.65rem;font-weight:800;padding:1px 6px;border-radius:50px;min-width:18px;text-align:center;transition:all .18s}
+.nav-pill:hover .pill-count{background:rgba(29,185,84,.12);color:var(--green)}
+.nav-pill.match{border-color:rgba(29,185,84,.4);color:var(--green-dim);background:rgba(29,185,84,.04)}
+.nav-pill.match .pill-count{background:var(--green);color:#fff}
+
+/* ── MAIN ── */
+.main{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+.section{margin-bottom:56px;scroll-margin-top:170px}
+.section.dim{opacity:.35}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--light-border)}
+.section-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;box-shadow:inset 0 -2px 4px rgba(0,0,0,.04)}
+.section-title{font-family:'Montserrat',sans-serif;font-size:.95rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text)}
+.section-count{margin-left:auto;font-size:.7rem;font-weight:700;color:var(--text-muted);background:#F1F5F9;padding:4px 10px;border-radius:50px}
+
+/* ── FAQ CARDS ── */
+.faq-item{background:#fff;border:1px solid var(--light-border);border-radius:14px;margin-bottom:10px;overflow:hidden;transition:all .25s cubic-bezier(.4,0,.2,1);position:relative}
+.faq-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--green),var(--green-light));opacity:0;transition:opacity .25s;border-radius:3px}
+.faq-item:hover{border-color:#CBD5E1;box-shadow:0 4px 16px -4px rgba(15,23,42,.08);transform:translateY(-1px)}
+.faq-item:hover::before{opacity:.4}
+.faq-item.open{border-color:rgba(29,185,84,.4);box-shadow:0 8px 24px -8px rgba(29,185,84,.25)}
+.faq-item.open::before{opacity:1}
+.faq-item.has-match{border-color:rgba(29,185,84,.5);background:linear-gradient(135deg,rgba(29,185,84,.03),transparent)}
+.faq-q{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;cursor:pointer;user-select:none}
+.faq-num{font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:800;color:var(--green);min-width:30px;padding-top:2px;letter-spacing:.04em;background:rgba(29,185,84,.1);border-radius:6px;text-align:center;padding:4px 0}
+.faq-qtext{font-size:.92rem;font-weight:600;color:var(--text);flex:1;line-height:1.5}
+.faq-arrow{width:24px;height:24px;border-radius:50%;background:#F1F5F9;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;transition:all .25s;flex-shrink:0;margin-top:2px}
+.faq-item:hover .faq-arrow{background:rgba(29,185,84,.1);color:var(--green)}
+.faq-item.open .faq-arrow{background:var(--green);color:#fff;transform:rotate(90deg)}
+.faq-a{max-height:0;overflow:hidden;padding:0 20px 0 64px;font-size:.88rem;line-height:1.7;color:#475569;transition:max-height .35s cubic-bezier(.4,0,.2,1),padding .35s}
+.faq-item.open .faq-a{max-height:5000px;padding:6px 20px 18px 64px;border-top:1px solid #F1F5F9}
+.faq-a strong{color:var(--text);font-weight:600}
+.faq-a em{color:#0F172A;font-style:italic}
 .faq-a ul{margin:8px 0 8px 16px}
 .faq-a ul li{margin-bottom:4px}
-.faq-a .tag{display:inline-block;background:#1DB95415;color:var(--green-dim);border:1px solid #1DB95430;border-radius:6px;padding:2px 8px;font-size:.78rem;font-weight:600;margin:2px 3px 2px 0}
-.faq-a .warn{background:#FFF3CD;border:1px solid #FFC10730;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:.84rem;color:#7A5C00}
-.faq-a .tip{background:#E8F5E9;border:1px solid #1DB95430;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:.84rem;color:#155724}
-.search-wrap{margin-bottom:32px;position:relative}
-.search-input{width:100%;padding:13px 18px 13px 46px;border:1.5px solid var(--light-border);border-radius:12px;font-size:.9rem;font-family:'Inter',sans-serif;outline:none;background:#fff;color:#1A2730;transition:border .18s}
-.search-input:focus{border-color:var(--green)}
-.search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#6B8A9E;font-size:16px}
-.no-results{text-align:center;color:#6B8A9E;padding:40px 0;font-size:.9rem}
-.footer{text-align:center;padding:32px;color:#6B8A9E;font-size:.8rem;border-top:1px solid var(--light-border);background:#fff}
-.faq-main-title{font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#0A0F14;margin-bottom:32px;text-align:center}
-.group-header{font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#1DB954;padding:28px 0 8px;margin-bottom:4px;border-bottom:1px solid #E8EEF4}
+.faq-a .tag{display:inline-block;background:rgba(29,185,84,.1);color:var(--green-dim);border:1px solid rgba(29,185,84,.25);border-radius:6px;padding:2px 8px;font-size:.76rem;font-weight:600;margin:2px 3px 2px 0}
+.faq-a .warn{background:linear-gradient(135deg,#FEF3C7,#FFF8E1);border:1px solid rgba(251,191,36,.4);border-left:3px solid #F59E0B;border-radius:8px;padding:12px 14px;margin-top:12px;font-size:.84rem;color:#78350F}
+.faq-a .tip{background:linear-gradient(135deg,#ECFDF5,#F0FDF4);border:1px solid rgba(29,185,84,.3);border-left:3px solid var(--green);border-radius:8px;padding:12px 14px;margin-top:12px;font-size:.84rem;color:#14532D}
+
+/* ── CUSTOM ICONS ── */
+.gicon{display:inline-flex;align-items:center;justify-content:center;color:var(--green);vertical-align:-3px;flex-shrink:0}
+.gicon svg{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.section-icon .gicon{font-size:20px}
+.section-icon .gicon svg{stroke-width:1.8}
+.group-header .gicon{font-size:14px;color:var(--green)}
+.faq-a .gicon{font-size:14px;margin-right:3px}
+.faq-a .warn .gicon,.faq-a .tip .gicon{font-size:15px;margin-right:6px;vertical-align:-2px}
+.faq-a .warn .gicon{color:#D97706}
+.faq-a .tip .gicon{color:var(--green)}
+.faq-q .gicon{font-size:14px;margin-right:4px}
+mark.hl .gicon{vertical-align:baseline}
+
+/* ── SEARCH HIGHLIGHT ── */
+mark.hl{background:linear-gradient(180deg,transparent 60%,rgba(255,235,59,.7) 60%);color:inherit;padding:0 2px;border-radius:2px;font-weight:700}
+.faq-q mark.hl{background:linear-gradient(180deg,transparent 60%,rgba(29,185,84,.4) 60%);color:var(--text)}
+
+.no-results{text-align:center;color:var(--text-muted);padding:60px 20px;font-size:.95rem;background:#fff;border:1px dashed var(--light-border);border-radius:14px}
+.no-results-icon{font-size:2.5rem;margin-bottom:12px;opacity:.5}
+
+.group-header{font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--green);padding:24px 0 10px;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+.group-header::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(29,185,84,.3),transparent)}
+
+/* ── FAB BACK TO TOP ── */
+.fab{position:fixed;bottom:24px;right:24px;width:46px;height:46px;border-radius:50%;background:var(--text);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 6px 18px -4px rgba(0,0,0,.3);opacity:0;transform:translateY(20px) scale(.8);transition:all .25s;z-index:40;font-weight:700}
+.fab.show{opacity:1;transform:translateY(0) scale(1)}
+.fab:hover{background:var(--green);transform:translateY(-2px) scale(1.05)}
+
+.footer{text-align:center;padding:36px 20px;color:var(--text-muted);font-size:.78rem;background:#fff;border-top:1px solid var(--light-border)}
+.footer strong{color:var(--text)}
+
+@media(max-width:640px){
+  .hero{padding:48px 20px 40px}
+  .hero h1{font-size:2.2rem}
+  .hero-stats{gap:24px}
+  .main{padding:32px 16px 60px}
+  .faq-q{padding:14px 16px}
+  .faq-a{padding:0 16px 0 16px}
+  .faq-item.open .faq-a{padding:6px 16px 16px 16px}
+  .faq-num{margin-bottom:6px}
+}
 </style>
 </head>
 <body>
-<div class="topbar">
-  <a href="/" class="back">← Retour à la cartographie</a>
-  <div class="brand">FAQ <span>Closers</span></div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <a href="/" class="hero-back">← Retour à la cartographie</a>
+  <div class="hero-content">
+    <h1>FAQ Challenge</h1>
+    <p>Toutes les réponses pour structurer ton discours, traiter les objections et closer en confiance pendant le challenge MDB.</p>
+  </div>
+</section>
+
+<!-- ── STICKY SEARCH + NAV ── -->
+<div class="sticky-bar">
+  <div class="sticky-inner">
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-input" type="text" placeholder="Rechercher un mot, une question, une objection…" id="searchInput" oninput="filterFAQ()" autocomplete="off"/>
+      <button class="search-clear" id="searchClear" onclick="clearSearch()" aria-label="Effacer">✕</button>
+    </div>
+    <div class="search-meta" id="searchMeta">
+      <nav class="nav-pills" id="navPills">
+        <a href="#t1" class="nav-pill" data-target="t1">⚙️ Avant le challenge <span class="pill-count">10</span></a>
+        <a href="#t2" class="nav-pill" data-target="t2">🌿 Écosystème & Offres <span class="pill-count">29</span></a>
+        <a href="#t3" class="nav-pill" data-target="t3">📈 Pendant le challenge <span class="pill-count">21</span></a>
+        <a href="#t4" class="nav-pill" data-target="t4">🛡 Objections <span class="pill-count">13</span></a>
+        <a href="#t5" class="nav-pill" data-target="t5">⭐ Arguments <span class="pill-count">12</span></a>
+      </nav>
+    </div>
+  </div>
 </div>
 
 <div class="main">
-<h1 class="faq-main-title">FAQ</h1>
-<div class="search-wrap">
-  <span class="search-icon">🔍</span>
-  <input class="search-input" type="text" placeholder="Rechercher une question..." id="searchInput" oninput="filterFAQ()"/>
+<div id="noResults" class="no-results" style="display:none">
+  <div class="no-results-icon">🔍</div>
+  <div>Aucun résultat trouvé.<br><span style="font-size:.8rem;color:#94A3B8">Essaye un autre mot-clé ou une question plus courte.</span></div>
 </div>
-<div id="noResults" class="no-results" style="display:none">Aucun résultat pour cette recherche.</div>
 
 <!-- ══ T1 : AVANT LE CHALLENGE ══ -->
 <div class="section" id="t1">
@@ -1685,37 +1788,233 @@ body{font-family:'Inter',sans-serif;background:var(--light-bg);color:#1A2730;min
   GreenBull Campus · Ressource interne — Challenge MDB · Avril 2026 · <strong>Confidentiel</strong>
 </div>
 
+<button class="fab" id="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut">↑</button>
+
 <script>
-function toggle(btn) {
-  var item = btn.parentElement;
-  var wasOpen = item.classList.contains('open');
-  item.classList.toggle('open', !wasOpen);
+// ── ICON MAP : every emoji → inline green SVG (Lucide-style strokes) ──
+const ICONS = {
+  // Section icons
+  '⚙️':'<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/><circle cx="12" cy="12" r="3"/>',
+  '🌿':'<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19.2 2.96a1 1 0 0 1 1.8 0c1.05 1.92 1 8.5-2.5 11.5-3.5 3-7 4-7.5 5.5z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/>',
+  '📈':'<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
+  '🛡':'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  '🛡️':'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  '⭐':'<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+
+  // Group / common
+  '📋':'<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>',
+  '📨':'<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',
+  '👤':'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  '👥':'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  '💰':'<circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/>',
+  '💸':'<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/>',
+  '💳':'<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>',
+  '🏦':'<line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/>',
+  '🏠':'<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+  '🎉':'<path d="M5.8 11.3 2 22l10.7-3.79"/><path d="M4 3h.01"/><path d="M22 8h.01"/><path d="M15 2h.01"/><path d="M22 20h.01"/><path d="M22 2 19 7"/><path d="M14 3 9 9"/><path d="M22 14 15 8"/>',
+  '🎁':'<polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>',
+  '📊':'<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',
+  '📚':'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+  '📅':'<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  '📍':'<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+  '🎬':'<polygon points="5 3 19 12 5 21 5 3"/>',
+  '🎥':'<polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>',
+  '🎓':'<path d="M22 10v6"/><path d="M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
+  '💡':'<line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/>',
+  '⚠️':'<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+  '✅':'<polyline points="20 6 9 17 4 12"/>',
+  '❌':'<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
+  '🔁':'<polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>',
+  '🔍':'<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+  '🚫':'<circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>',
+  '🔴':'<circle cx="12" cy="12" r="9" fill="#EF4444" stroke="#EF4444"/>',
+  '🟡':'<circle cx="12" cy="12" r="9" fill="#F59E0B" stroke="#F59E0B"/>',
+  '🟢':'<circle cx="12" cy="12" r="9" fill="#1DB954" stroke="#1DB954"/>',
+  '📣':'<path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>',
+};
+
+// Build emoji-detection regex from map keys
+const EMOJI_RE = new RegExp(
+  Object.keys(ICONS).sort((a,b) => b.length - a.length).map(e => e.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),
+  'g'
+);
+
+// Wrap emoji char in <span class="gicon"><svg>...</svg></span>
+function emojiToIcon(em) {
+  return `<span class="gicon" data-em="${em}"><svg viewBox="0 0 24 24">${ICONS[em]}</svg></span>`;
+}
+
+// Replace emoji text-nodes with SVG icons (preserves DOM structure)
+function replaceEmojisInElement(root) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: n => {
+      const tag = n.parentElement && n.parentElement.tagName;
+      if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'MARK') return NodeFilter.FILTER_REJECT;
+      return EMOJI_RE.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  const nodes = [];
+  let n; while ((n = walker.nextNode())) nodes.push(n);
+  nodes.forEach(node => {
+    const html = node.nodeValue.replace(EMOJI_RE, m => emojiToIcon(m));
+    const tpl = document.createElement('template');
+    tpl.innerHTML = html;
+    node.parentNode.replaceChild(tpl.content, node);
+  });
+}
+
+// Run replacement on full body
+replaceEmojisInElement(document.body);
+
+// Save original innerHTML once for restore on search clear
+const originals = new WeakMap();
+document.querySelectorAll('.faq-item').forEach(item => originals.set(item, item.innerHTML));
+
+// Per-section pill counts (set initial counts)
+document.querySelectorAll('[data-target]').forEach(pill => {
+  const sec = document.getElementById(pill.dataset.target);
+  if (sec) pill.querySelector('.pill-count').textContent = sec.querySelectorAll('.faq-item').length;
+});
+
+// Toggle accordion via delegation
+document.addEventListener('click', e => {
+  const q = e.target.closest('.faq-q');
+  if (!q) return;
+  q.parentElement.classList.toggle('open');
+});
+
+// Smooth scroll for nav pills (offset accounted via scroll-margin-top)
+document.querySelectorAll('[data-target]').forEach(pill => {
+  pill.addEventListener('click', e => {
+    e.preventDefault();
+    const sec = document.getElementById(pill.dataset.target);
+    if (sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+
+// Escape user input for safe regex
+function escRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+// Walk text nodes inside element and wrap matches in <mark class="hl">
+function highlightInElement(el, regex) {
+  let count = 0;
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+    acceptNode: n => {
+      if (!n.parentElement) return NodeFilter.FILTER_REJECT;
+      // Skip already-marked, scripts, styles
+      const tag = n.parentElement.tagName;
+      if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'MARK') return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  const nodes = [];
+  let n;
+  while ((n = walker.nextNode())) nodes.push(n);
+  nodes.forEach(node => {
+    const text = node.nodeValue;
+    if (!regex.test(text)) return;
+    regex.lastIndex = 0;
+    const frag = document.createDocumentFragment();
+    let last = 0, m;
+    while ((m = regex.exec(text)) !== null) {
+      if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+      const mark = document.createElement('mark');
+      mark.className = 'hl';
+      mark.textContent = m[0];
+      frag.appendChild(mark);
+      last = m.index + m[0].length;
+      count++;
+      if (m[0].length === 0) regex.lastIndex++; // safety
+    }
+    if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+    node.parentNode.replaceChild(frag, node);
+  });
+  return count;
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  filterFAQ();
 }
 
 function filterFAQ() {
-  var q = document.getElementById('searchInput').value.toLowerCase();
-  var items = document.querySelectorAll('.faq-item');
-  var sections = document.querySelectorAll('.section');
-  var any = false;
-  items.forEach(function(item) {
-    var text = item.textContent.toLowerCase();
-    var match = !q || text.includes(q);
-    item.style.display = match ? '' : 'none';
-    if (match) any = true;
+  const input = document.getElementById('searchInput');
+  const q = input.value.trim();
+  const items = document.querySelectorAll('.faq-item');
+  const sections = document.querySelectorAll('.section');
+  const clearBtn = document.getElementById('searchClear');
+  clearBtn.classList.toggle('show', !!q);
+
+  // Restore original HTML of each item (removes old highlights)
+  items.forEach(item => {
+    item.innerHTML = originals.get(item);
+    item.classList.remove('open', 'has-match');
   });
-  sections.forEach(function(s) {
-    var visible = Array.from(s.querySelectorAll('.faq-item')).some(function(i){ return i.style.display !== 'none'; });
-    s.style.display = visible ? '' : 'none';
-  });
-  document.getElementById('noResults').style.display = (q && !any) ? '' : 'none';
-  if (q) {
-    items.forEach(function(item) {
-      if(item.style.display !== 'none') item.classList.add('open');
+
+  if (!q) {
+    // No query: show everything, reset pills, hide no-results
+    items.forEach(i => i.style.display = '');
+    sections.forEach(s => { s.style.display = ''; s.classList.remove('dim'); });
+    document.querySelectorAll('[data-target]').forEach(pill => {
+      pill.classList.remove('match');
+      const sec = document.getElementById(pill.dataset.target);
+      if (sec) pill.querySelector('.pill-count').textContent = sec.querySelectorAll('.faq-item').length;
     });
-  } else {
-    items.forEach(function(item){ item.classList.remove('open'); });
+    document.getElementById('noResults').style.display = 'none';
+    return;
   }
+
+  const regex = new RegExp(escRegex(q), 'gi');
+  let totalMatches = 0;
+  let visibleItems = 0;
+
+  items.forEach(item => {
+    const text = item.textContent;
+    const isMatch = regex.test(text);
+    regex.lastIndex = 0;
+    if (isMatch) {
+      item.style.display = '';
+      item.classList.add('open', 'has-match');
+      totalMatches += highlightInElement(item, new RegExp(escRegex(q), 'gi'));
+      visibleItems++;
+    } else {
+      item.style.display = 'none';
+    }
+  });
+
+  // Update section + pill counts
+  sections.forEach(s => {
+    const visible = Array.from(s.querySelectorAll('.faq-item')).filter(i => i.style.display !== 'none').length;
+    s.style.display = visible ? '' : 'none';
+    s.classList.toggle('dim', visible === 0);
+  });
+  document.querySelectorAll('[data-target]').forEach(pill => {
+    const sec = document.getElementById(pill.dataset.target);
+    if (!sec) return;
+    const cnt = Array.from(sec.querySelectorAll('.faq-item')).filter(i => i.style.display !== 'none').length;
+    pill.querySelector('.pill-count').textContent = cnt;
+    pill.classList.toggle('match', cnt > 0);
+  });
+
+  document.getElementById('noResults').style.display = visibleItems === 0 ? '' : 'none';
 }
+
+// Floating action button visibility
+const fab = document.getElementById('fab');
+window.addEventListener('scroll', () => {
+  fab.classList.toggle('show', window.scrollY > 500);
+});
+
+// Cmd/Ctrl+K to focus search
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    document.getElementById('searchInput').focus();
+  }
+  if (e.key === 'Escape' && document.activeElement === document.getElementById('searchInput')) {
+    clearSearch();
+  }
+});
 </script>
 </body>
 </html>
