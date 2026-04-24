@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { mentors, memberCounts } from "@/data/mentors";
+import { mentors, memberCounts, incomingMentorsByRegion } from "@/data/mentors";
 import { regions, overseasTerritories } from "@/data/france-regions";
 import { departmentsByRegion } from "@/data/departments";
 
@@ -24,11 +24,16 @@ export default function Home() {
   const mentorCounts = useMemo(() => {
     const c: Record<string, number> = {};
     for (const m of mentors) c[m.region] = (c[m.region] ?? 0) + 1;
+    // Include incoming (newly joined) mentors in the count
+    for (const [region, n] of Object.entries(incomingMentorsByRegion)) {
+      c[region] = (c[region] ?? 0) + n;
+    }
     return c;
   }, []);
 
+  const totalIncoming = Object.values(incomingMentorsByRegion).reduce((a, b) => a + b, 0);
   const counts = tab === "mentors" ? mentorCounts : memberCounts;
-  const total = tab === "mentors" ? mentors.length : Object.values(memberCounts).reduce((a, b) => a + b, 0);
+  const total = tab === "mentors" ? mentors.length + totalIncoming : Object.values(memberCounts).reduce((a, b) => a + b, 0);
 
   // Color intensity based on count
   const maxCount = Math.max(...Object.values(counts));
@@ -46,6 +51,15 @@ export default function Home() {
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-[#F4F6F8] flex flex-col">
+      {/* Confidential banner */}
+      <div className="flex-none bg-gradient-to-r from-red-600 to-red-700 text-white text-center text-[11px] font-semibold tracking-wider uppercase py-1.5 px-4 flex items-center justify-center gap-2 shadow-sm">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <span>Confidentiel — Ne pas partager ni communiquer ce document interne</span>
+      </div>
       {/* Header with tabs */}
       <header className="flex-none px-6 pt-5 pb-3">
         <div className="flex items-center justify-between">
@@ -243,6 +257,19 @@ export default function Home() {
 
             {/* Popup content */}
             <div className="overflow-y-auto p-6">
+              {tab === "mentors" && (incomingMentorsByRegion[selected] ?? 0) > 0 && (
+                <div className="mb-5 flex items-center gap-3 p-3.5 rounded-xl bg-gradient-to-r from-amber-50 to-amber-100/40 border border-amber-200">
+                  <div className="flex-none w-9 h-9 rounded-full bg-amber-400 text-white flex items-center justify-center font-bold text-sm shadow-sm">
+                    +{incomingMentorsByRegion[selected]}
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-[11px] uppercase tracking-wider font-bold text-amber-700">Nouveau</div>
+                    <div className="text-sm text-amber-900">
+                      {incomingMentorsByRegion[selected]} nouveau mentor a rejoint cette région.
+                    </div>
+                  </div>
+                </div>
+              )}
               {tab === "mentors" ? (
                 selectedMentors.length > 0 ? (
                   <div className="grid gap-4 sm:grid-cols-2">
@@ -332,9 +359,11 @@ export default function Home() {
                     })}
                   </div>
                 ) : (
-                  <div className="text-center py-10 text-gray-500">
-                    Aucun mentor dans cette région pour l&apos;instant.
-                  </div>
+                  (incomingMentorsByRegion[selected] ?? 0) === 0 && (
+                    <div className="text-center py-10 text-gray-500">
+                      Aucun mentor dans cette région pour l&apos;instant.
+                    </div>
+                  )
                 )
               ) : (
                 (() => {

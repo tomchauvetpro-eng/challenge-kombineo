@@ -202,6 +202,14 @@ export const mentors: Mentor[] = [
     bio: `32 ans, Tours. Ancien opticien, reconverti MDB depuis 4 ans. 14 OP sur petites surfaces : réno ciblée, optimisation DPE, revente clé en main à des investisseurs.`,
   },
   {
+    name: `Florentin LANDEVILLE`,
+    region: `Pays de la Loire`,
+    zone: `Tours & Centre-Val de Loire`,
+    tags: [`MDB depuis 4 ans`, `14 opérations`, `Ex-opticien reconverti`],
+    quote: `« Repérer le potentiel, rénover intelligemment, valoriser au maximum. »`,
+    bio: `32 ans, Tours. Ancien opticien, reconverti MDB depuis 4 ans. 14 OP sur petites surfaces : réno ciblée, optimisation DPE, revente clé en main à des investisseurs.`,
+  },
+  {
     name: `Grégory PERROTTE`,
     region: `Centre-Val de Loire`,
     zone: `Orléans & Centre-Val de Loire`,
@@ -226,6 +234,11 @@ export const mentors: Mentor[] = [
     bio: `Ancien sapeur-pompier de Paris. Découverte de l'immo en 2017 → 70+ biens en 2 ans. Fondateur de PIERRE MDB (achat-revente, réno, valorisation) à Rennes.`,
   },
 ];
+
+// Incoming mentors (placeholder count, no name yet)
+export const incomingMentorsByRegion: Record<string, number> = {
+  "Normandie": 1,
+};
 
 export const memberCounts: Record<string, number> = {
   "Bretagne": 63,
