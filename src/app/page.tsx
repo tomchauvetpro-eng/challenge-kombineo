@@ -57,28 +57,41 @@ export default function Home() {
               {total} {tab === "mentors" ? "mentors" : "membres"} · Répartition par région
             </p>
           </div>
-          <nav className="flex gap-1 bg-white rounded-full p-1 shadow-sm border border-gray-200">
-            <button
-              onClick={() => { setTab("mentors"); setSelected(null); }}
-              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
-                tab === "mentors"
-                  ? "bg-[#1DB954] text-white shadow"
-                  : "text-gray-600 hover:text-[#1DB954]"
-              }`}
+          <div className="flex items-center gap-3">
+            <nav className="flex gap-1 bg-white rounded-full p-1 shadow-sm border border-gray-200">
+              <button
+                onClick={() => { setTab("mentors"); setSelected(null); }}
+                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
+                  tab === "mentors"
+                    ? "bg-[#1DB954] text-white shadow"
+                    : "text-gray-600 hover:text-[#1DB954]"
+                }`}
+              >
+                Mentors
+              </button>
+              <button
+                onClick={() => { setTab("membres"); setSelected(null); }}
+                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
+                  tab === "membres"
+                    ? "bg-[#1DB954] text-white shadow"
+                    : "text-gray-600 hover:text-[#1DB954]"
+                }`}
+              >
+                Membres
+              </button>
+            </nav>
+            <a
+              href="/faq.html"
+              className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0F1923] text-white text-sm font-semibold shadow-sm hover:bg-[#1DB954] transition-all hover:-translate-y-0.5 hover:shadow-md"
             >
-              Mentors
-            </button>
-            <button
-              onClick={() => { setTab("membres"); setSelected(null); }}
-              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
-                tab === "membres"
-                  ? "bg-[#1DB954] text-white shadow"
-                  : "text-gray-600 hover:text-[#1DB954]"
-              }`}
-            >
-              Membres
-            </button>
-          </nav>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+              <span>FAQ</span>
+            </a>
+          </div>
         </div>
       </header>
 

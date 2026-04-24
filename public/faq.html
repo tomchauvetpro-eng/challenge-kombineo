@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FAQ Closers — GreenBull MDB</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#0A0F14;
+  --card:#111920;
+  --border:#1E2D38;
+  --green:#1DB954;
+  --green-dim:#16903F;
+  --white:#F0F4F8;
+  --gray:#6B8A9E;
+  --light-bg:#F4F7FA;
+  --light-card:#FFFFFF;
+  --light-border:#E0E8EF;
+}
+body{font-family:'Inter',sans-serif;background:var(--light-bg);color:#1A2730;min-height:100vh}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:#fff;border-bottom:1px solid var(--light-border);position:sticky;top:0;z-index:100}
+.back{display:inline-flex;align-items:center;gap:8px;color:#6B8A9E;text-decoration:none;font-size:.85rem;font-weight:600;transition:color .15s}
+.back:hover{color:var(--green)}
+.brand{font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#0A0F14}
+.brand span{color:var(--green)}
+.main{max-width:860px;margin:0 auto;padding:40px 24px 80px}
+.section{margin-bottom:56px;scroll-margin-top:70px}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.section-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.section-title{font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#0A0F14}
+.faq-item{background:#fff;border:1px solid var(--light-border);border-radius:12px;margin-bottom:8px;overflow:hidden;transition:box-shadow .2s}
+.faq-item:hover{box-shadow:0 4px 16px rgba(0,0,0,.07)}
+.faq-item.open{border-color:#1DB95440;box-shadow:0 0 0 3px #1DB95410}
+.faq-q{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;cursor:pointer;user-select:none}
+.faq-num{font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;color:var(--green);min-width:28px;padding-top:1px;letter-spacing:.04em}
+.faq-qtext{font-size:.9rem;font-weight:600;color:#1A2730;flex:1;line-height:1.45}
+.faq-arrow{font-size:14px;color:#6B8A9E;transition:transform .2s;flex-shrink:0;padding-top:2px}
+.faq-item.open .faq-arrow{transform:rotate(90deg);color:var(--green)}
+.faq-a{display:none;padding:0 18px 18px 60px;font-size:.875rem;line-height:1.7;color:#3A5060;border-top:1px solid #F0F4F8}
+.faq-item.open .faq-a{display:block;padding-top:14px}
+.faq-a strong{color:#1A2730;font-weight:600}
+.faq-a ul{margin:8px 0 8px 16px}
+.faq-a ul li{margin-bottom:4px}
+.faq-a .tag{display:inline-block;background:#1DB95415;color:var(--green-dim);border:1px solid #1DB95430;border-radius:6px;padding:2px 8px;font-size:.78rem;font-weight:600;margin:2px 3px 2px 0}
+.faq-a .warn{background:#FFF3CD;border:1px solid #FFC10730;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:.84rem;color:#7A5C00}
+.faq-a .tip{background:#E8F5E9;border:1px solid #1DB95430;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:.84rem;color:#155724}
+.search-wrap{margin-bottom:32px;position:relative}
+.search-input{width:100%;padding:13px 18px 13px 46px;border:1.5px solid var(--light-border);border-radius:12px;font-size:.9rem;font-family:'Inter',sans-serif;outline:none;background:#fff;color:#1A2730;transition:border .18s}
+.search-input:focus{border-color:var(--green)}
+.search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#6B8A9E;font-size:16px}
+.no-results{text-align:center;color:#6B8A9E;padding:40px 0;font-size:.9rem}
+.footer{text-align:center;padding:32px;color:#6B8A9E;font-size:.8rem;border-top:1px solid var(--light-border);background:#fff}
+.faq-main-title{font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#0A0F14;margin-bottom:32px;text-align:center}
+.group-header{font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#1DB954;padding:28px 0 8px;margin-bottom:4px;border-bottom:1px solid #E8EEF4}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="/" class="back">← Retour à la cartographie</a>
+  <div class="brand">FAQ <span>Closers</span></div>
+</div>
+
+<div class="main">
+<h1 class="faq-main-title">FAQ</h1>
+<div class="search-wrap">
+  <span class="search-icon">🔍</span>
+  <input class="search-input" type="text" placeholder="Rechercher une question..." id="searchInput" oninput="filterFAQ()"/>
+</div>
+<div id="noResults" class="no-results" style="display:none">Aucun résultat pour cette recherche.</div>
+
+<!-- ══ T1 : AVANT LE CHALLENGE ══ -->
+<div class="section" id="t1">
+  <div class="section-header">
+    <div class="section-icon" style="background:#FFF3E0">⚙️</div>
+    <div class="section-title">Avant le challenge</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">01</span>
+      <span class="faq-qtext">Quels sont les outils utilisés sur ce challenge ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <ul>
+        <li><strong>Calendly</strong> — prise de rendez-vous avec les prospects</li>
+        <li><strong>Google Meet</strong> — appels en visioconférence</li>
+        <li><strong>Ringover</strong> — appels en audio, numéro professionnel dédié</li>
+        <li><strong>Kombineo</strong> — CRM de suivi des prospects et des ventes</li>
+        <li><strong>Empower</strong> (intégré à Ringover) — enregistrement automatique des appels</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">02</span>
+      <span class="faq-qtext">Comment paramétrer les outils ? — Étape par étape</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Suis les étapes dans l'ordre suivant :
+      <br><br>
+      <strong>① Adresse mail professionnelle Google</strong><br>
+      Tu as reçu une adresse mail Greenbull. Connecte-toi à cette adresse Google — c'est le compte que tu utiliseras pour tous les outils ci-dessous.
+      <br><br>
+      <strong>② Calendly</strong><br>
+      Tu as reçu une invitation Calendly par e-mail. Accepte l'invitation et connecte-toi via ton compte Google Greenbull. Une fois connecté :
+      <ul>
+        <li>Paramètre tes disponibilités avec <strong>6 créneaux maximum</strong></li>
+        <li>Vérifie que le fuseau horaire est bien réglé sur <strong>Europe/Paris (CET)</strong></li>
+        <li>Vérifie que chaque RDV génère bien un lien Google Meet automatique</li>
+      </ul>
+      <span class="tag">Tuto Calendly — lien à venir</span>
+      <br><br>
+      <strong>③ Ringover</strong><br>
+      Tu as reçu une invitation Ringover par e-mail. Connecte-toi via cette invitation — tu auras directement accès à ton numéro professionnel. Fais un appel test pour vérifier que tout fonctionne.
+      <ul>
+        <li>Installe l'app Ringover sur ton téléphone ET ton ordinateur</li>
+        <li>Utilise ce numéro pour <strong>tous</strong> tes appels challenge — jamais ton numéro personnel</li>
+      </ul>
+      <span class="tag">Tuto Ringover — lien à venir</span>
+      <br><br>
+      <strong>④ Empower (intégré à Ringover)</strong><br>
+      Empower est directement intégré à Ringover — il enregistre automatiquement tes appels. Un tuto dédié te sera fourni pour le paramétrage.
+      <span class="tag">Tuto Empower — lien à venir</span>
+      <br><br>
+      <strong>⑤ Kombineo</strong><br>
+      Tu as reçu une invitation Kombineo par e-mail. Connecte-toi via cette invitation — tu as directement accès au CRM. Si tu ne connais pas Kombineo, un tuto est disponible ci-dessous.
+      <span class="tag">Tuto Kombineo — lien à venir</span>
+      <div class="tip">💡 Vérifie l'accès à chaque outil avant le premier jour du challenge.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">03</span>
+      <span class="faq-qtext">Je n'arrive pas à me connecter à un des outils — que faire ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Pas de panique — on règle ça ensemble. Prends directement rendez-vous via le lien ci-dessous pour qu'on se connecte et qu'on paramètre l'outil en question.
+      <br><br>
+      <a href="https://calendly.com/sarahbusinesspro7/appel-de-selection?month=2026-04" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#1DB95415;color:#1DB954;border:1px solid #1DB95440;border-radius:6px;padding:4px 12px;font-size:.82rem;font-weight:600;text-decoration:none;margin-top:6px">📅 Prendre rendez-vous</a>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">04</span>
+      <span class="faq-qtext">Comment remplir le CRM Kombineo au quotidien ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Kombineo doit être mis à jour <strong>en fin de chaque journée</strong> sans exception. Pour chaque prospect :
+      <ul>
+        <li>Statut du contact (RDV confirmé / no-show / relance / vendu / perdu)</li>
+        <li>Notes sur l'échange (objections soulevées, profil, prochaine étape)</li>
+        <li>Date de prochaine relance planifiée</li>
+      </ul>
+      <div class="warn">⚠️ Si le CRM n'est pas à jour en fin de journée → pénalité de <strong>−10 € par jour</strong> versée dans la cagnotte collective.</div>
+      <span class="tag">🎬 Tuto Kombineo — lien à venir</span>
+    </div>
+  </div>
+
+  <div class="group-header">📋 Avant la vente</div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">05</span>
+      <span class="faq-qtext">Qu'est-ce que le RGPD et quand dois-je le mentionner ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Greenbull est certifié <strong>Qualiopi</strong>, ce qui implique des obligations légales strictes sur l'enregistrement des appels et la protection des données.
+      <ul>
+        <li>En début de <strong>chaque appel</strong>, tu dois informer le prospect que l'appel est enregistré à des fins d'amélioration de la formation (obligation Qualiopi)</li>
+        <li>Si le prospect s'y oppose → stopper l'enregistrement immédiatement, sans discussion</li>
+        <li>Les enregistrements sont automatiques via Ringover/Empower — vérifie que l'outil est actif avant de commencer</li>
+      </ul>
+      <div class="warn">⚠️ Qualiopi implique également que les contrats doivent être signés au moment du paiement — pas 2 jours après. Tout décalage entre signature et paiement expose Greenbull à un risque lors des contrôles. C'est non négociable.</div>
+    </div>
+  </div>
+
+  <div class="group-header">💰 Après la vente</div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">06</span>
+      <span class="faq-qtext">Est-ce qu'on peut envoyer le contrat au client avant qu'il prenne sa décision ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Oui. Il est possible de soumettre un <strong>contrat vierge</strong> au client pour qu'il puisse prendre connaissance des conditions de l'accompagnement avant de s'engager.
+      <div class="tip">💡 C'est un bon levier pour lever les objections liées aux garanties ou aux conditions — le client lit le contrat, les doutes se dissipent d'eux-mêmes.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">07</span>
+      <span class="faq-qtext">Est-ce qu'il est possible de payer via le CPF ou d'autres dispositifs ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Non. Les seuls moyens de paiement acceptés sont :
+      <ul>
+        <li>Paiement à titre <strong>personnel</strong> (personne physique)</li>
+        <li>Paiement via une <strong>société</strong> (à titre professionnel)</li>
+      </ul>
+      Les autres dispositifs (CPF, financement externe, etc.) ne sont pas disponibles car les processus administratifs associés sont très longs.
+      <div class="warn">⚠️ Ne pas évoquer ces autres possibilités de paiement avec le client — pour ne pas créer d'attentes ou allonger inutilement le processus de décision.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">08</span>
+      <span class="faq-qtext">Quelles sont les pénalités en cas de non-respect des process ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Deux situations entraînent des pénalités :
+      <br><br>
+      <strong>💸 Perte de commission</strong>
+      <ul>
+        <li>Si une vente n'est pas annoncée dans le groupe WhatsApp vente</li>
+        <li>Si le Typeform vente n'est pas rempli après la vente</li>
+      </ul>
+      Dans ces deux cas, <strong>la commission est perdue</strong> — sans exception.
+      <br><br>
+      <strong>💰 Pénalité CRM (Kombineo)</strong>
+      <ul>
+        <li>Si le CRM Kombineo n'est pas rempli et à jour à la fin de chaque journée</li>
+        <li>Pénalité : <strong>−10 € par jour et par closer</strong> concerné</li>
+        <li>Cette somme est versée dans une <strong>cagnotte collective</strong></li>
+        <li>La cagnotte est redistribuée à tous les closers ayant bien respecté les process tout au long du challenge</li>
+      </ul>
+      <div class="warn">⚠️ Ces règles s'appliquent sans exception. Le respect des process protège tout le monde — la cagnotte récompense ceux qui jouent le jeu.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">09</span>
+      <span class="faq-qtext">Qu'en est-il concernant les doublons de rendez-vous ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Les doublons sont vérifiés <strong>tous les soirs</strong> lors de la revue des prises de rendez-vous. Voici les règles applicables selon chaque situation :
+      <br><br>
+      <strong>📅 Règle 1 — Doublon de RDV détecté en amont</strong>
+      <ul>
+        <li>Le closer qui conserve le rendez-vous est celui qui l'a obtenu <strong>en premier</strong></li>
+        <li>Le deuxième appel est supprimé</li>
+      </ul>
+      <strong>🔁 Règle 2 — Prospect d'un ancien challenge</strong>
+      <ul>
+        <li>Si le prospect a déjà été en contact avec un conseiller Greenbull sur un ancien challenge ET que le suivi a été bien fait → <strong>le premier conseiller garde l'appel et la vente</strong></li>
+        <li>Si le prospect n'a jamais été suivi, ou qu'aucune relance n'a été faite la semaine précédant le challenge → le nouveau closer prend l'appel librement et touche <strong>100% de la commission</strong></li>
+      </ul>
+      <strong>🔍 Règle 3 — Doublon découvert après la vente (non mentionné)</strong>
+      <ul>
+        <li>Si un prospect a déjà eu un appel avec un closer sur ce challenge mais ne l'a pas mentionné, et qu'un deuxième closer close l'appel → les deux appels sont écoutés et la commission est <strong>partagée à 50/50</strong></li>
+      </ul>
+      <strong>🚫 Règle 4 — Doublon mentionné mais ignoré</strong>
+      <ul>
+        <li>Si le prospect mentionne qu'il a déjà eu un appel sur ce challenge et que le closer décide quand même de continuer et de closer → <strong>la commission est perdue intégralement</strong></li>
+      </ul>
+      <strong>🚫 Règle 5 — Doublon volontaire</strong>
+      <ul>
+        <li>Si un closer apprend pendant l'appel que le prospect a déjà eu un entretien avec un autre closer sur ce challenge</li>
+        <li>Et qu'il décide malgré tout de continuer et de closer → <strong>la commission est perdue intégralement</strong></li>
+      </ul>
+      <div class="tip">💡 Nous sommes une équipe. Nous sommes tous là pour s'entraider — pas pour se voler des ventes.</div>
+      <div class="warn">⚠️ Dès qu'un prospect mentionne un échange sur ce challenge → stopper l'appel immédiatement et le renvoyer vers son closer attitré. Pas d'exception.</div>
+    </div>
+  </div>
+
+  <div class="group-header">📨 Ressources</div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">10</span>
+      <span class="faq-qtext">Quelles sont les ressources que je peux envoyer à mon prospect après l'échange ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Tu es libre d'envoyer les ressources suivantes à ton prospect :
+      <ul>
+        <li>✅ Le <strong>contrat vierge</strong> — pour qu'il prenne connaissance des conditions</li>
+        <li>✅ Les <strong>plaquettes des offres</strong> citées durant l'échange</li>
+        <li>✅ Les <strong>témoignages</strong> fournis par les managers</li>
+        <li>✅ Les <strong>liens de replay des lives</strong> Greenbull</li>
+      </ul>
+      <div class="warn">⚠️ Ne jamais envoyer la cartographie des mentors et des membres. Ce document a été créé comme outil interne d'aide aux closers — il n'a pas été réalisé par Greenbull et n'est pas destiné aux prospects.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ T2 : ÉCOSYSTÈME & OFFRES ══ -->
+<div class="section" id="t2">
+  <div class="section-header">
+    <div class="section-icon" style="background:#E8F5E9">🌿</div>
+    <div class="section-title">Écosystème & Offres</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">01</span>
+      <span class="faq-qtext">Quel est l'objectif principal de Greenbull MDB ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Permettre à toute personne motivée — salarié, entrepreneur, investisseur débutant ou confirmé — de <strong>réaliser des opérations rentables de marchand de biens</strong>, en leur donnant accès aux outils, au réseau et au financement qu'ils n'auraient jamais pu obtenir seuls.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">02</span>
+      <span class="faq-qtext">Pourquoi Greenbull MDB propose-t-il un accompagnement au sein de son écosystème ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Greenbull MDB a réalisé que pour réussir en marchand de biens, il ne suffit pas d'avoir de l'argent — il faut aussi du temps, du réseau et des compétences. Or dans la réalité, certaines personnes ont du capital mais pas de temps, d'autres ont du temps mais peu de capital. L'écosystème Greenbull MDB est né de cette réalité : <strong>créer une symbiose entre des membres aux profils complémentaires</strong>, pour que chacun puisse avancer là où il en est.
+      <br><br>
+      Mais il y a une autre dimension, souvent méconnue : <strong>Greenbull MDB n'accompagne pas des membres pour vendre un accompagnement</strong>. L'intérêt est mutuel.
+      <ul>
+        <li>Les membres formés deviennent des professionnels sérieux → ils renforcent la crédibilité et la solidité du réseau</li>
+        <li>Plus l'écosystème grandit, plus Greenbull MDB a accès à des deals off-market, des contacts, des partenaires et des opportunités de projets à fort potentiel</li>
+        <li>Plus le réseau est présent en France — et demain à l'international — plus les opportunités qui remontent vers Greenbull MDB sont importantes et qualitatives</li>
+      </ul>
+      <div class="tip">💡 En résumé : Greenbull MDB aide ses membres à réussir, et les membres qui réussissent font grandir Greenbull MDB. C'est un cercle vertueux, pas une relation à sens unique.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">03</span>
+      <span class="faq-qtext">Qui fait partie de l'écosystème Greenbull MDB ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      L'écosystème comprend :
+      <ul>
+        <li><strong>Les membres actifs</strong> — 1 500+ incubés répartis sur toute la France et les DOM-TOM</li>
+        <li><strong>Les mentors</strong> — 27 marchands de biens actifs présents dans 11 régions</li>
+        <li><strong>Les banques partenaires (Ceixa)</strong> — accès facilité au financement</li>
+        <li><strong>Le réseau off-market</strong> — accès prioritaire à des biens avant leur mise sur le marché public</li>
+        <li><strong>Le Comité de Projet</strong> — experts qui auditent et valident chaque opération (technique, juridique, financier)</li>
+        <li><strong>Les partenaires métiers</strong> — artisans qualifiés et recommandés dans différentes régions</li>
+        <li><strong>Les partenaires professionnels</strong> — avocats, fiscalistes, juristes, experts-comptables, notaires</li>
+      </ul>
+      <div class="tip">🎥 Loom de présentation de l'écosystème — lien à venir</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">04</span>
+      <span class="faq-qtext">Qu'est-ce qu'un deal off-market ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Un deal off-market, c'est simplement un bien immobilier qui n'est pas disponible au grand public — il ne passe pas par Leboncoin, SeLoger ou les plateformes classiques. Il circule uniquement au sein d'un réseau.
+      <br><br>
+      Chez Greenbull MDB, ces deals ne viennent pas d'une plateforme ou d'un catalogue. Ils viennent directement <strong>de la communauté et du réseau</strong> :
+      <ul>
+        <li>Des marchands de biens expérimentés qui connaissent très bien leur région et ont des contacts locaux solides</li>
+        <li>Des membres qui se rencontrent lors des événements en présentiel et créent des liens — et avec ces liens, des opportunités</li>
+        <li>Des personnes dans l'entourage des membres — un voisin, un ami, quelqu'un qui veut vendre rapidement, qui est dans l'urgence, qui préfère une vente discrète plutôt que de passer par une agence</li>
+      </ul>
+      <div class="tip">💡 C'est exactement pour ça que la taille de la communauté a de la valeur : plus on est nombreux, plus les liens se créent, plus les deals off-market circulent. Ce n'est pas Greenbull qui les génère — c'est le réseau. Et demain, si le réseau disparaît, les deals disparaissent avec lui. C'est la force d'un écosystème vivant.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">05</span>
+      <span class="faq-qtext">Combien y a-t-il de membres MDB et comment sont-ils répartis ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      La communauté Greenbull MDB compte plus de <strong>1 500 membres actifs</strong> répartis sur toute la France métropolitaine et les DOM-TOM. C'est l'une des plus grandes communautés de marchands de biens en France.
+      <br><br>
+      <a href="/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#1DB95415;color:#1DB954;border:1px solid #1DB95440;border-radius:6px;padding:6px 14px;font-size:.85rem;font-weight:600;text-decoration:none;margin-bottom:12px">🗺 Voir la répartition des membres par région</a>
+      <br>
+      <strong>💡 Argument de closing important</strong>
+      <ul>
+        <li>Greenbull MDB organise régulièrement des <strong>événements en présentiel</strong> dans toutes les régions — rencontres entre membres, soirées networking, journées terrain</li>
+        <li>Ces événements permettent des <strong>associations entre membres</strong> — quelqu'un qui a du capital peut s'associer avec quelqu'un qui a du temps, et inversement</li>
+        <li>Ces rencontres génèrent également des <strong>deals off-market</strong> — des opportunités qui circulent uniquement au sein du réseau, jamais sur les plateformes publiques</li>
+        <li>En rejoignant Greenbull MDB, le membre intègre un réseau vivant, pas juste une plateforme de formation</li>
+      </ul>
+      <div class="tip">💡 À utiliser en closing : "Vous n'intégrez pas juste une formation — vous rejoignez une communauté de 1 500 personnes qui font la même chose que vous, qui se rencontrent, s'associent et partagent des opportunités que personne d'autre ne voit."</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">06</span>
+      <span class="faq-qtext">Qui sont les mentors, combien sont-ils et sur quelles zones interviennent-ils ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Greenbull MDB compte <strong>27 mentors actifs</strong> couvrant <strong>11 régions françaises</strong>, dont les DOM-TOM. Ce sont tous des marchands de biens en activité — pas des théoriciens.
+      <br><br>
+      <a href="/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#1DB95415;color:#1DB954;border:1px solid #1DB95440;border-radius:6px;padding:6px 14px;font-size:.85rem;font-weight:600;text-decoration:none;margin-top:4px">🗺 Voir la cartographie des mentors et des membres MDB</a>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">07</span>
+      <span class="faq-qtext">Y a-t-il des possibilités d'évolution au sein de l'écosystème Greenbull MDB ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Oui, absolument. Beaucoup de nos mentors actuels sont d'anciens membres qui ont commencé comme tout le monde — en se formant et en étant accompagnés sur le marchand de biens. Aujourd'hui, grâce à leurs années d'expérience et aux projets qu'ils ont réalisés, ils sont devenus mentors à leur tour.
+      <div class="tip">💡 C'est d'ailleurs ce qu'on souhaite pour chacun de nos membres : ne pas rester un incubé, mais évoluer, grandir et un jour contribuer à l'écosystème en accompagnant les prochains.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">08</span>
+      <span class="faq-qtext">Quelles sont les statistiques clés des anciens membres ayant intégré Greenbull MDB ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <div class="tip">📊 Réponse à venir.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">09</span>
+      <span class="faq-qtext">Qu'est-ce que le Comité de Projet ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Le Comité de Projet est l'instance d'experts de Greenbull MDB qui analyse et étudie la viabilité de chaque opération soumise par un membre.
+      <br><br>
+      <strong>Son rôle est strictement consultatif</strong> — il n'autorise pas, ne certifie pas et ne valide pas la réalisation d'un projet. Il étudie, restitue ses préconisations et accompagne la réflexion du membre.
+      <ul>
+        <li>Il examine chaque projet sur trois dimensions : <strong>technique</strong> (état du bien, travaux), <strong>juridique</strong> (permis, divisions, copropriété) et <strong>financier</strong> (montage, fiscalité, rentabilité)</li>
+        <li>Il étudie la viabilité du projet en se basant sur une <strong>marge prévisionnelle d'au moins 20%</strong></li>
+        <li>Il restitue un <strong>rapport écrit sous 48h</strong> comprenant les points forts, les points de vigilance et une conclusion synthétique</li>
+        <li>Un <strong>suivi en visio</strong> est prévu pour échanger sur les résultats et approfondir les points soulevés</li>
+        <li>Les audits sont <strong>illimités pour l'offre Incubateur</strong></li>
+      </ul>
+      <div class="tip">💡 Le CP est le filet de sécurité entre le membre et une erreur coûteuse. C'est ce qui transforme une bonne intuition en opération étudiée et sécurisée.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">10</span>
+      <span class="faq-qtext">De qui est composé le Comité de Projet ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Le Comité de Projet est composé de <strong>4 experts</strong> aux profils complémentaires :
+      <br><br>
+      <strong>Marion</strong> — Experte accompagnement Marchands de Biens
+      <ul>
+        <li>+10 ans d'expérience en promotion immobilière</li>
+        <li>Maîtrise de toute la chaîne de valeur : montage d'opérations, dépôt de permis de construire, pilotage financier, administratif, juridique et technique</li>
+        <li>Spécialisée dans les achats/reventes avec travaux dans le sud de la France</li>
+        <li><em>Compétences : Immobilier · Gestion de projet · Montage opérationnel · Suivi technique · Suivi financier</em></li>
+      </ul>
+      <strong>Arnaud</strong> — Chef de projet immobilier
+      <ul>
+        <li>Actif au sein du Comité Projet depuis 3 ans</li>
+        <li>Ancien dirigeant de 6 agences immobilières dans le sud de la France pendant 20 ans, expert immobilier FNAIM pendant 15 ans</li>
+        <li>MDB depuis 2008 — 17 opérations : 8 permis d'aménager/divisions parcellaires, 3 flips rapides, 6 découpes avec travaux</li>
+        <li><em>Compétences : Suivi financier · Ingénierie du bâtiment · Travaux publics · Maîtrise d'œuvre</em></li>
+      </ul>
+      <strong>Jérôme</strong> — Auditeur de Projets Immobiliers Marchand de Biens
+      <ul>
+        <li>+20 ans d'expérience dans le bâtiment, fondateur et dirigeant de 2 entreprises de second-œuvre</li>
+        <li>MDB depuis 2010 — quinzaine d'opérations de l'acquisition à la revente</li>
+        <li><em>Compétences : Analyse technique travaux · Maîtrise des coûts et délais · Maîtrise d'œuvre · Suivi de travaux · Aménagement et plans intérieurs</em></li>
+      </ul>
+      <strong>Michael</strong> — Expert accompagnement Marchand de Biens
+      <ul>
+        <li>+20 ans d'investissement immobilier et MDB</li>
+        <li>Spécialiste des opérations complexes : parkings, terrains, permis de construire, découpes, immeubles complets</li>
+        <li>Intervient principalement en association avec d'autres marchands de biens</li>
+        <li><em>Compétences : Montage complexe · Association stratégique · Découpe optimisée · Vision patrimoniale</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">11</span>
+      <span class="faq-qtext">Combien d'offres sont proposées et lesquelles ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Greenbull MDB propose <strong>7 offres</strong> :
+      <br><br>
+      <strong>Sur 6 mois</strong>
+      <ul><li>Accélérateur — <strong>5 995 €</strong></li></ul>
+      <strong>Sur 1 an</strong>
+      <ul>
+        <li>Incubateur Solo — <strong>15 995 €</strong></li>
+        <li>Incubateur Duo — <strong>21 990 €</strong></li>
+        <li>Incubateur Trio — <strong>27 985 €</strong></li>
+      </ul>
+      <strong>Sur 3 ans</strong>
+      <ul>
+        <li>Incubateur Solo — <strong>21 990 €</strong></li>
+        <li>Incubateur Duo — <strong>27 985 €</strong></li>
+        <li>Incubateur Trio — <strong>33 980 €</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">12</span>
+      <span class="faq-qtext">Combien de temps dure l'accompagnement et quels sont les tarifs ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <strong>Accélérateur — 5 995 €</strong>
+      <ul><li>Durée : <strong>6 mois</strong></li></ul>
+      <strong>Incubateur 1 an — 15 995 €</strong>
+      <ul>
+        <li>Durée : <strong>1 an</strong></li>
+        <li>Renouvellement possible à <strong>5 995 € par an</strong> — autant de fois que souhaité, que vous soyez Solo, Duo ou Trio</li>
+        <li>Il n'est pas possible de passer en cours de route sur l'offre 3 ans — le choix se fait à l'inscription</li>
+      </ul>
+      <strong>Incubateur 3 ans — 21 990 €</strong>
+      <ul>
+        <li>Durée : <strong>3 ans</strong></li>
+        <li>Même prix que l'Incubateur 1 an + 1 renouvellement (21 990 €) — mais pour <strong>3 ans au lieu de 2</strong></li>
+        <li>En partant directement sur l'offre 3 ans, le membre bénéficie d'<strong>une année offerte</strong></li>
+      </ul>
+      <div class="tip">💡 Argument closing : pour le même budget, l'offre 3 ans donne une année de plus. Le choix entre 1 an et 3 ans se fait à l'inscription — impossible de changer ensuite.</div>
+      <div class="warn">⚠️ Ne pas mentionner spontanément la possibilité pour un membre Accélérateur de passer à l'Incubateur en payant la différence — uniquement si la question est posée directement.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">13</span>
+      <span class="faq-qtext">Que comprend concrètement l'accompagnement Incubateur proposé ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <span class="tag">📚 Formation</span><span class="tag">👤 Mentors</span><span class="tag">🔍 Comité de Projet</span><span class="tag">🏦 Financement</span><span class="tag">🏠 Off-market</span><span class="tag">🎉 Événements</span>
+      <br><br>
+      <strong>📚 Formation</strong>
+      <ul>
+        <li>Modules théoriques sur toute la chaîne MDB</li>
+        <li>Cas pratiques</li>
+        <li>Conférences exclusives</li>
+        <li>Accès à vie + mises à jour</li>
+        <li>Certificat de fin de formation</li>
+      </ul>
+      <strong>👤 Mentors</strong>
+      <ul>
+        <li>Experts MDB de ta région</li>
+        <li>Accès au groupe Telegram régional</li>
+        <li>Accès au groupe Facebook national</li>
+        <li>Possibilité d'intégrer les groupes d'autres régions — les membres ont accès à tous les groupes</li>
+      </ul>
+      <strong>🔍 Comité de Projet</strong>
+      <ul>
+        <li>Étude de viabilité de chaque opération soumise (technique, juridique, financier)</li>
+        <li>Basé sur une marge prévisionnelle d'au moins 20%</li>
+        <li>Audits illimités (offre Incubateur)</li>
+      </ul>
+      <strong>🏦 Financement garanti</strong>
+      <ul>
+        <li>Accès facilité aux banques partenaires (Ceixa) sur tout projet présentant un plan de marche prévisionnel viable</li>
+        <li>Accès aux moteurs d'association Greenbull MDB</li>
+        <li>Accès au crowdfunding</li>
+      </ul>
+      <strong>🏠 Deals off-market</strong>
+      <ul>
+        <li>Accès prioritaire aux deals issus du réseau Greenbull MDB</li>
+        <li>Deals générés par les membres eux-mêmes au sein de la communauté</li>
+      </ul>
+      <strong>🎉 Événements & Séminaires</strong>
+      <ul>
+        <li>Séminaire d'intégration — <strong>5 juin à Nice</strong></li>
+        <li>Journées d'intégration en présentiel pour rencontrer la communauté et les mentors</li>
+        <li>Événements réguliers en présentiel : rencontres entre marchands de biens, rencontres avec les mentors au sein des régions, apéros MDB, visites de biens</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">14</span>
+      <span class="faq-qtext">Que comprend concrètement l'accompagnement Accélérateur proposé ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <span class="tag">📚 Formation</span><span class="tag">👥 Groupe</span><span class="tag">🔍 Comité de Projet</span><span class="tag">🎁 Passage Incubateur offert</span>
+      <br><br>
+      <strong>📚 Formation</strong>
+      <ul>
+        <li>Modules théoriques sur toute la chaîne MDB</li>
+        <li>Cas pratiques</li>
+        <li>Conférences exclusives</li>
+        <li>Accès à vie + mises à jour</li>
+        <li>Certificat de fin de formation</li>
+      </ul>
+      <strong>👥 Groupe Accélérateur</strong>
+      <ul>
+        <li>Accès au groupe Facebook dédié aux membres Accélérateur</li>
+        <li>Échanges avec tous les autres membres MDB ayant souscrit à cette offre</li>
+        <li>Un mentor est présent dans ce groupe — les membres peuvent poser leurs questions et obtenir des réponses</li>
+      </ul>
+      <strong>🔍 Comité de Projet</strong>
+      <ul>
+        <li><strong>1 audit de projet</strong> inclus (non illimité)</li>
+        <li>Retranscription écrite de l'audit sous <strong>48 heures</strong></li>
+        <li>Visio de suivi incluse</li>
+      </ul>
+      <div style="background:#F4F7FA;border:1px solid #E0E8EF;border-radius:10px;padding:16px 18px;margin-top:16px">
+        <strong style="color:#1DB954;font-family:'Montserrat',sans-serif;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase">🎁 Conditions pour obtenir le passage à l'Incubateur offert</strong>
+        <p style="margin-top:8px;font-size:.85rem;color:#3A5060;line-height:1.6">Si les conditions suivantes sont réunies dans les <strong>6 mois</strong> suivant l'entrée dans l'Accélérateur :</p>
+        <ul style="margin-top:6px;font-size:.85rem;color:#3A5060">
+          <li>Faire auditer un projet par le Comité de Projet</li>
+          <li>Ce projet doit être <strong>validé à plus de 20% de marge prévisionnelle</strong></li>
+          <li>Avec le <strong>compromis de vente signé</strong></li>
+        </ul>
+        <p style="margin-top:10px;font-size:.85rem;color:#3A5060">→ Alors le membre obtient <strong>1 an d'accès à l'Incubateur offert et gratuitement</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">15</span>
+      <span class="faq-qtext">Que ne comprend PAS l'accompagnement ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <ul>
+        <li>Une garantie de revenu ou de marge à un montant précis</li>
+        <li>La livraison automatique d'un deal off-market dans un délai défini</li>
+        <li>Un financement "quelles que soient les conditions"</li>
+        <li>Un accès immédiat direct (numéro de téléphone personnel) à un mentor spécifique</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">16</span>
+      <span class="faq-qtext">Quel profil correspond à quelle offre ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <strong>L'Incubateur est l'offre principale — c'est la seule à avoir en tête.</strong>
+      <br><br>
+      Tous les profils correspondent à l'Incubateur. Que ce soit Solo, Duo, Trio, 1 an ou 3 ans — c'est l'offre de référence. En tant que closer, tu dois partir du principe qu'il n'y a qu'une seule offre : <strong>l'Incubateur</strong>.
+      <br><br>
+      <strong>L'Accélérateur est un downsell — un plan B uniquement.</strong>
+      <br>
+      On ne le propose que dans deux cas précis :
+      <ul>
+        <li><strong>Situation financière très compliquée</strong> — le prospect est motivé, veut se lancer, mais n'a vraiment pas les fonds pour l'Incubateur, même en paiement échelonné. Dans ce cas uniquement, l'Accélérateur peut être une porte d'entrée.</li>
+        <li><strong>Profil novice sans ambition MDB forte</strong> — quelqu'un qui veut juste mettre un pied dans le marchand de biens, apprendre, sans projet de se consacrer sérieusement ni de réaliser plusieurs opérations. Pas de temps, pas de volonté de s'y investir pleinement → Accélérateur OK.</li>
+      </ul>
+      <div class="warn">⚠️ L'Accélérateur ne doit pas exister dans la tête des closers. Tu pitches l'Incubateur. Si et seulement si le prospect ne peut vraiment pas — financièrement ou en termes d'engagement — tu replonges sur l'Accélérateur comme solution de repli.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">17</span>
+      <span class="faq-qtext">Quelle offre présenter en priorité selon le profil ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Présente toujours <strong>l'Incubateur en premier</strong> si le prospect a la capacité financière. L'Accélérateur se présente pour les prospects avec un budget limité ou qui veulent d'abord se former avant de s'engager sur une opération. Dans tous les cas, pars de la douleur du prospect, pas de l'offre — l'offre n'est que la solution à son problème spécifique.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">18</span>
+      <span class="faq-qtext">Que signifie concrètement la "garantie" dans l'offre ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      C'est une <strong>obligation de moyens</strong> — pas une garantie de résultat. C'est le terme exact du contrat.
+      <br><br>
+      <strong>Important : le rôle du Comité de Projet est strictement consultatif.</strong> Il n'autorise pas, ne certifie pas et ne valide pas la réalisation d'un projet. Il étudie la viabilité et restitue ses préconisations.
+      <br><br>
+      Si un projet a été étudié par le CP à plus de 20% de marge prévisionnelle, Greenbull MDB s'engage à mettre en œuvre tous les moyens nécessaires pour accompagner le membre dans la recherche de financement :
+      <ul>
+        <li>Accès aux banques partenaires</li>
+        <li>Mise en relation avec des investisseurs potentiels</li>
+        <li>Association stratégique (y compris avec des entités du groupe Greenbull)</li>
+        <li>Levées de fonds</li>
+        <li>Financement participatif via des plateformes spécialisées</li>
+      </ul>
+      <strong>83% des membres Greenbull MDB ont obtenu leur financement</strong> grâce aux moyens mis en place.
+      <br><br>
+      Mais la décision finale appartient aux tiers (banques, investisseurs, partenaires) — elle ne peut pas engager la responsabilité de Greenbull MDB :
+      <ul>
+        <li>Un refus bancaire reste possible</li>
+        <li>La décision d'investissement ou de partenariat relève de la libre appréciation des tiers sollicités</li>
+        <li>Une association peut ne pas aboutir si les conditions ne conviennent pas au membre</li>
+      </ul>
+      <div class="warn">⚠️ Ne jamais promettre à un prospect qu'il obtiendra son financement. Greenbull met tout en œuvre — mais la décision finale n'est pas de son ressort. C'est une nuance essentielle à maîtriser avant chaque appel.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">19</span>
+      <span class="faq-qtext">L'accès au réseau de partenaires = simple mise en relation ou services inclus ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Les deux. Pour certains partenaires (notaires, experts-comptables référencés), l'accès est inclus dans l'accompagnement. Pour d'autres, c'est une mise en relation privilégiée avec des professionnels qui connaissent le modèle MDB. Dans tous les cas, le membre bénéficie d'interlocuteurs qui parlent le même langage — ce qui fait gagner un temps considérable sur chaque opération.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">20</span>
+      <span class="faq-qtext">Est-il possible de se lancer à plusieurs ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Oui, c'est possible selon l'offre choisie :
+      <br><br>
+      <strong>Accélérateur</strong>
+      <ul>
+        <li>Pas de format Duo ou Trio — un seul accès par inscription</li>
+        <li>Si plusieurs personnes souhaitent se lancer ensemble avec l'Accélérateur, chacun doit souscrire individuellement au même tarif</li>
+        <li>Ils pourront travailler ensemble, mais chacun aura son propre accès</li>
+      </ul>
+      <strong>Incubateur 1 an</strong>
+      <ul>
+        <li>Solo : <strong>15 995 €</strong></li>
+        <li>Duo : <strong>21 990 €</strong></li>
+        <li>Trio : <strong>27 985 €</strong></li>
+      </ul>
+      <strong>Incubateur 3 ans</strong>
+      <ul>
+        <li>Solo : <strong>21 990 €</strong></li>
+        <li>Duo : <strong>27 985 €</strong></li>
+        <li>Trio : <strong>33 980 €</strong></li>
+      </ul>
+      <div class="tip">💡 Le format Duo ou Trio est idéal pour des personnes qui veulent s'associer dès le départ — ils partagent le même mentor, les mêmes audits Comité de Projet et les mêmes opportunités off-market.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">21</span>
+      <span class="faq-qtext">Quelles sont les conditions d'intégration à l'écosystème Greenbull MDB ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Il n'y a pas de prérequis d'expérience. Les conditions sont : motivation réelle, capacité à s'engager dans le processus d'accompagnement, et disposer d'un apport minimum pour les offres concernées. Le profil idéal est quelqu'un de curieux, prêt à apprendre et à passer à l'action — pas forcément quelqu'un qui connaît déjà l'immobilier.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">22</span>
+      <span class="faq-qtext">Est-il possible de démarrer son accompagnement à une date ultérieure ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Oui, c'est possible au cas par cas et dans la limite du raisonnable. Un léger décalage (quelques jours, la semaine suivante) peut être envisagé — dans ce cas, contacter le manager pour valider ce qui est faisable.
+      <ul>
+        <li>Décalage de quelques jours à une semaine → possible, à valider avec le manager</li>
+        <li>Décalage d'un mois ou plus → <strong>ne pas faire signer</strong> — c'est un follow-up à suivre et à recontacter au bon moment</li>
+      </ul>
+      <div class="warn">⚠️ Faire signer un client qui n'est pas prêt à démarrer = risque élevé de rétractation dans les 14 jours. En cas de doute, contacter le manager avant de conclure.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">23</span>
+      <span class="faq-qtext">Est-il possible de mettre en pause ou de geler ses accès pendant un temps ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Oui, c'est possible. Le client peut geler ses accès pendant un laps de temps et les reprendre ensuite — le temps de pause ne sera pas décompté de la durée de son accompagnement.
+      <ul>
+        <li>Le gel des accès est possible sur demande</li>
+        <li><strong>Le paiement continue</strong> pendant toute la durée du gel — les mensualités ne sont pas suspendues</li>
+        <li>À la reprise, le client retrouve son accompagnement là où il s'était arrêté</li>
+      </ul>
+      <div class="warn">⚠️ Le gel ne suspend pas les paiements — bien le préciser au client avant de valider cette option.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">24</span>
+      <span class="faq-qtext">Y a-t-il un système d'affiliation ou des codes promotionnels pour les anciens membres ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Non. Il n'existe pas de code promotionnel ni de système d'affiliation à ce jour. Le tarif est le même pour tous, qu'on soit ancien membre, proche d'un membre ou nouvel arrivant.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">25</span>
+      <span class="faq-qtext">Qu'est-ce que la journée d'intégration ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      La journée d'intégration est un <strong>événement présentiel</strong> organisé par Greenbull MDB. C'est l'occasion pour les nouveaux membres de rencontrer les mentors, les équipes Greenbull et les autres incubés.
+      <ul>
+        <li>Première date : <strong>5 juin à Nice</strong></li>
+        <li>Plusieurs dates seront possibles — elles seront communiquées aux membres</li>
+        <li>Le membre aura toutes les informations sur cette journée lors de son <strong>appel d'onboarding</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">26</span>
+      <span class="faq-qtext">Quel est le profil type du client qui réussit le mieux ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Le profil qui réussit le mieux est quelqu'un de <strong>curieux, disponible et qui passe à l'action rapidement</strong>. Ni trop prudent (qui attend 6 mois avant de faire une offre), ni trop impulsif (qui achète sans validation). Il applique les conseils du mentor, participe à la communauté, et comprend que le premier projet est un apprentissage autant qu'une opération rentable.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">27</span>
+      <span class="faq-qtext">Quel est le profil type qui échoue ou abandonne ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Celui qui s'inscrit sans passer à l'action — qui consomme la formation mais n'envoie jamais une offre. Aussi : celui qui veut tout contrôler seul et refuse les conseils du mentor. Et celui qui cherche une garantie absolue avant de démarrer — dans l'immobilier comme en entrepreneuriat, le risque zéro n'existe pas.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">28</span>
+      <span class="faq-qtext">Un client localisé à l'étranger peut-il intégrer l'accompagnement MDB ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Tout dépend de l'objectif du prospect.
+      <br><br>
+      <strong>✅ Il souhaite investir en France ou dans les zones couvertes (DOM-TOM inclus)</strong>
+      <ul>
+        <li>Oui, c'est tout à fait possible</li>
+        <li>Il peut suivre toute la formation à distance et être accompagné à distance</li>
+        <li>Il pourra venir sur place pour les événements en présentiel et pour mener son activité si nécessaire</li>
+      </ul>
+      <strong>⚠️ Il souhaite faire du MDB dans son pays (hors zones couvertes)</strong>
+      <ul>
+        <li>L'accompagnement reste possible mais avec des limites claires à lui préciser dès le départ</li>
+        <li>Les règles du MDB varient selon les pays — nos experts maîtrisent le marché français et les territoires sur lesquels nous opérons, pas les marchés étrangers</li>
+        <li>L'offre <strong>Accélérateur</strong> peut être pertinente pour lui s'il souhaite monter en compétence sur le MDB et développer un réseau francophone</li>
+        <li>Ne pas faire de fausses promesses sur l'accompagnement terrain à l'étranger</li>
+      </ul>
+      <div class="warn">⚠️ Ne jamais promettre un mentor local en Guadeloupe, au Canada, en Belgique, en Suisse ou dans tout autre pays non couvert. Les mentors ont une localisation précise et n'opèrent pas hors de leurs régions.</div>
+      <div class="tip">💡 Challenger le prospect : si vous êtes francophone et que l'immobilier vous intéresse, la France est un terrain idéal avec un cadre juridique clair et un réseau solide. C'est une vraie opportunité pour les investisseurs francophones à l'étranger.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">29</span>
+      <span class="faq-qtext">Greenbull MDB peut-il investir directement dans un projet ? Si oui, sous quelles conditions ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Greenbull MDB peut co-investir dans certains projets validés par le Comité Projet, selon les conditions négociées au cas par cas. Cette option n'est pas systématique et ne fait pas partie des offres standards. Ne la présente pas comme une garantie dans un appel sans confirmation préalable des managers.</div>
+  </div>
+</div>
+
+<!-- ══ T3 : PENDANT LE CHALLENGE ══ -->
+<div class="section" id="t3">
+  <div class="section-header">
+    <div class="section-icon" style="background:#E3F2FD">📈</div>
+    <div class="section-title">Pendant le challenge</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">01</span>
+      <span class="faq-qtext">Que faire lorsque je reçois un nouveau rendez-vous ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <ul>
+        <li><strong>Lire les réponses de la candidature prospect</strong> — avant tout contact, prendre connaissance du formulaire rempli par le prospect pour comprendre son profil, sa situation et ses objectifs</li>
+        <li><strong>Confirmer le RDV dans l'heure qui suit</strong> — la première prise de contact doit avoir lieu au maximum 1h après la prise de RDV. Plus tu attends, plus le prospect refroidit</li>
+        <li><strong>Envoyer un message de confirmation</strong> avec le lien Google Meet + l'heure du RDV</li>
+      </ul>
+      <div class="tip">💡 Un RDV confirmé rapidement et de façon humaine (pas un template froid) a un taux de show-up bien plus élevé.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">02</span>
+      <span class="faq-qtext">Quels sont les processus de pré-call pour maximiser le taux de show-up ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <strong>La règle d'or : plus le délai est long, plus le no-show est probable.</strong> Première prise de contact le plus tôt possible après la prise de RDV — dans l'heure idéalement.
+      <br><br>
+      <strong>Créer une vraie connexion humaine</strong>
+      <ul>
+        <li>Les prospects ont souvent déjà vécu plusieurs calls de closing — ils connaissent les process. Un message générique et impersonnel sera ignoré.</li>
+        <li>L'objectif n'est pas juste de confirmer un RDV — c'est de donner envie au prospect de venir sur l'appel <em>pour toi</em>.</li>
+        <li>Personnalise le message en fonction de ce que tu as lu dans sa candidature.</li>
+      </ul>
+      <strong>Les techniques qui fonctionnent</strong>
+      <ul>
+        <li><strong>Message vocal (audio)</strong> — après le premier message écrit, envoyer un audio court et naturel</li>
+        <li><strong>Message vidéo</strong> — encore plus impactant. 30 secondes, souriant</li>
+        <li><strong>Question ouverte</strong> — Ex : <em>"Comment s'est passé le live pour vous ?"</em></li>
+        <li><strong>Appel court de prise de contact</strong> — un appel de 2-3 minutes pour se présenter</li>
+      </ul>
+      <div class="tip">💡 Le show-up, ça se prépare.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">03</span>
+      <span class="faq-qtext">Dois-je préqualifier mes rendez-vous ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      La règle est simple : <strong>on ne disqualifie pas sur critère financier.</strong> Tous les appels se font.
+      <br><br>
+      La disqualification est réservée à quatre cas précis :
+      <ul>
+        <li><strong>Hors zone géographique couverte</strong></li>
+        <li><strong>Profil instable</strong></li>
+        <li><strong>Personne sous curatelle ou tutelle</strong></li>
+        <li><strong>RDV fake</strong></li>
+      </ul>
+      <div class="warn">⚠️ Ne pas annuler ou éviter un appel parce que le prospect "n'a pas l'air d'avoir les fonds".</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">04</span>
+      <span class="faq-qtext">Quelle est la structure type d'un appel qui convertit ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <strong>0 – 3 min — Cadre & RGPD</strong>
+      <ul>
+        <li>Se présenter, poser le cadre de l'échange</li>
+        <li>Informer le prospect que l'appel est enregistré (obligation Qualiopi)</li>
+        <li>Annoncer le déroulé de l'appel</li>
+      </ul>
+      <strong>3 – 20 min — Découverte & questiologie</strong>
+      <ul>
+        <li>Comprendre ce que recherche le prospect et ce qui l'amène</li>
+        <li>Comprendre la situation actuelle, identifier ses blocages, ses peurs, ses expériences passées</li>
+        <li>Creuser ses objectifs réels — pas juste "investir dans l'immobilier" mais pourquoi, pour quoi, pour quand</li>
+        <li>Écouter plus que parler — le ratio doit être 30/70 en faveur du prospect</li>
+      </ul>
+      <strong>20 – 25 min — Projection</strong>
+      <ul>
+        <li>Reprendre tous les besoins et blocages identifiés</li>
+        <li>Projeter le prospect dans la solution</li>
+        <li>Créer de l'adhésion avant de parler de l'offre</li>
+      </ul>
+      <strong>25 – 35 min — Validation & traitement des objections</strong>
+      <ul>
+        <li>Valider point par point que tout est aligné</li>
+        <li>Traiter en amont toutes les objections potentielles</li>
+        <li>Vérifier que tous les feux sont au vert avant de passer au pitch</li>
+      </ul>
+      <strong>Si tous les feux sont au vert → Pitch & closing</strong>
+      <ul>
+        <li>Présenter l'offre adaptée au profil du prospect</li>
+        <li>Demander clairement la décision</li>
+        <li>Enchaîner sur les étapes suivantes (contrat, paiement, Typeform)</li>
+      </ul>
+      <div class="warn">⚠️ Ne jamais pitcher si toutes les objections n'ont pas été surmontées.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">05</span>
+      <span class="faq-qtext">Quand closer en R1 et quand partir en R2 ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <strong>🔴 Prospect pas encore conscientisé — R1 → R2 obligatoire</strong>
+      <ul>
+        <li>Il ne sait pas encore si le MDB est fait pour lui</li>
+        <li>L'objectif du R1 : l'amener à <strong>verbaliser lui-même</strong> ce qui lui manque</li>
+        <li>Attiser sa curiosité et replanifier un R2</li>
+      </ul>
+      <strong>🟡 Prospect sans budget — R1 → R2 Accélérateur</strong>
+      <ul>
+        <li>Impossible de closer sur l'Incubateur si le financement n'est vraiment pas là</li>
+        <li>Replanifier un R2 avec une proposition sur l'Accélérateur</li>
+      </ul>
+      <strong>🟢 Prospect conscientisé et engagé — R1 closing possible</strong>
+      <ul>
+        <li>Il sait qu'il veut faire du MDB</li>
+        <li>Il sait qu'il a besoin d'un accompagnement</li>
+        <li>Pitcher en fin d'appel si tous les feux sont au vert</li>
+      </ul>
+      <div class="tip">💡 La règle d'or : donner suffisamment d'éléments pour que le prospect comprenne qu'on a les solutions à ses problèmes — mais ne pas tout dire.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">06</span>
+      <span class="faq-qtext">Quelles erreurs pendant l'appel font chuter le taux de closing ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <ul>
+        <li><strong>Ne pas être en confiance avec les offres ou convaincu de ce qu'on propose</strong></li>
+        <li><strong>Avoir des éléments flous ou ne pas savoir répondre à certaines questions</strong></li>
+        <li><strong>Pitcher trop tôt sans avoir compris la situation du prospect</strong></li>
+        <li><strong>Ne pas traiter les objections — les esquiver</strong></li>
+        <li><strong>Ne pas laisser le prospect s'exprimer</strong></li>
+        <li><strong>Essayer de convaincre un prospect</strong> — on ne convainc pas, on accompagne une décision</li>
+        <li><strong>Laisser repartir un prospect sans date de relance fixée</strong></li>
+        <li><strong>Deviner à la place du prospect</strong></li>
+        <li><strong>Pitcher l'offre comme une liste de fonctionnalités</strong></li>
+      </ul>
+      <br>
+      <strong>💡 La bonne approche du pitch :</strong>
+      <ul>
+        <li>Relier chaque élément à un problème exprimé par le prospect</li>
+        <li><em>"Tu m'as dit que ton blocage c'est le financement — voilà comment on règle ça."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">07</span>
+      <span class="faq-qtext">Quelles erreurs en dehors de l'appel font chuter le taux de closing ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <ul>
+        <li><strong>Ne pas confirmer le RDV rapidement</strong></li>
+        <li><strong>Un suivi post-appel inexistant</strong></li>
+        <li><strong>Ne pas mettre à jour le CRM (Kombineo)</strong></li>
+        <li><strong>Ne pas préparer ses appels</strong></li>
+        <li><strong>Mauvaise énergie entre les calls</strong></li>
+        <li><strong>Ne pas tenir compte des conseils et axes d'amélioration des managers</strong></li>
+        <li><strong>Ne pas avoir préparé son environnement avant le challenge</strong></li>
+        <li><strong>Mauvaise gestion organisationnelle et hygiène de vie</strong></li>
+        <li><strong>Ne pas respecter les process</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">08</span>
+      <span class="faq-qtext">Comment préparer son environnement avant et pendant le challenge ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <strong>Avant chaque appel</strong>
+      <ul>
+        <li>Avoir relu le contrat — connaître les garanties, les conditions</li>
+        <li>Avoir relu la fiche candidature du prospect</li>
+        <li>Être dans une pièce calme, sans interruption possible</li>
+        <li>Garder les liens importants ouverts sur son ordinateur</li>
+      </ul>
+      <strong>Pendant le challenge</strong>
+      <ul>
+        <li><strong>Bien assister aux sessions de préparation</strong></li>
+        <li><strong>Faire des pauses entre les appels</strong></li>
+        <li><strong>Ne pas ouvrir trop de créneaux</strong></li>
+        <li><strong>Se détacher émotionnellement de l'appel précédent</strong></li>
+        <li><strong>Effacer l'idée "si je ne close pas celui-ci, je peux closer le suivant"</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">09</span>
+      <span class="faq-qtext">Que faire à la fin de la journée pour optimiser les performances du lendemain ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <ul>
+        <li><strong>Prendre des notes sur les appels passés</strong></li>
+        <li><strong>Identifier les questions restées floues</strong></li>
+        <li><strong>Se rapprocher du manager</strong></li>
+        <li><strong>Mettre à jour le CRM Kombineo</strong></li>
+        <li><strong>Planifier les relances du lendemain</strong> à des horaires précis</li>
+        <li><strong>Effectuer les Typeforms</strong> si ce n'est pas déjà fait</li>
+        <li><strong>Se couper mentalement du travail</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">10</span>
+      <span class="faq-qtext">Que faire si mes performances baissent ou si je n'ai pas closé ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <strong>1. Identifier la cause</strong>
+      <ul>
+        <li>Est-ce technique ? (structure d'appel, traitement des objections, pitch)</li>
+        <li>Est-ce énergétique ? (fatigue, démotivation, manque de confiance)</li>
+      </ul>
+      <strong>2. Contacter son manager sans attendre</strong>
+      <ul>
+        <li>Demander un appel de feedback</li>
+        <li>Demander au manager d'écouter des calls récents</li>
+      </ul>
+      <strong>3. Ne pas changer de stratégie en plein challenge</strong>
+      <ul>
+        <li>Modifier son approche, son script, son comportement parce qu'il n'y a pas eu de vente jusqu'ici = erreur</li>
+        <li>La patience et la constance sont des qualités essentielles en closing</li>
+      </ul>
+      <div class="tip">💡 Les managers sont là pour t'accompagner. N'attends pas que ça empire.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">11</span>
+      <span class="faq-qtext">Pourquoi le focus, l'énergie et le mindset jouent un rôle clé dans la performance ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Le closing est un jeu d'énergie. Le prospect ressent ton niveau d'engagement à travers le ton, le rythme et la précision de tes mots. Un closer qui croit profondément dans ce qu'il vend — parce qu'il connaît le produit, les résultats et les garanties — est incomparablement plus convaincant qu'un closer qui récite un script. Investis 30 min par jour à comprendre les success stories des membres et des mentors : c'est ton meilleur carburant.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">12</span>
+      <span class="faq-qtext">Quelles sont les étapes à suivre lorsqu'une vente est effectuée ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <div class="warn">⚠️ Un acompte n'est pas une vente — voir la question suivante pour le process spécifique.</div>
+      <br>
+      <strong>💳 Si paiement par carte</strong>
+      <ul>
+        <li><strong>Étape 1 — Envoyer et faire signer le contrat</strong></li>
+        <li><strong>Étape 2 — Envoyer le lien de paiement</strong></li>
+        <li><strong>Étape 3 — Remplir le Typeform vente</strong></li>
+        <li><strong>Étape 4 — Prendre RDV onboarding dans les 24h</strong></li>
+      </ul>
+      <strong>🏦 Si paiement par virement</strong>
+      <ul>
+        <li><strong>Étape 1 — Envoyer et faire signer le contrat</strong></li>
+        <li><strong>Étape 2 — Demander la capture d'écran du virement</strong></li>
+        <li><strong>Étape 3 — Remplir le Typeform vente avec la capture</strong></li>
+        <li><strong>Étape 4 — Prendre RDV onboarding à 72h</strong></li>
+      </ul>
+      <div class="tip">💡 Le client reçoit ses accès uniquement après validation du paiement.</div>
+      <br>
+      <strong>📣 Étape obligatoire — Annonce dans le groupe WhatsApp vente</strong>
+      <ul>
+        <li>Une fois le Typeform rempli, poster <strong>immédiatement</strong> un message dans le groupe WhatsApp vente avec : prénom et nom, offre, mode de paiement, plan de paiement</li>
+      </ul>
+      <div class="warn">⚠️ Si la vente n'est pas annoncée dans le groupe ET que le Typeform n'est pas rempli, le closer perd sa commission.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">13</span>
+      <span class="faq-qtext">À quel moment faut-il envoyer le contrat au client ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Le contrat doit être envoyé et signé <strong>au moment du paiement</strong> — pas avant, pas après.
+      <ul>
+        <li>Le closer envoie le contrat au client</li>
+        <li>Le client signe le contrat</li>
+        <li>Le paiement est effectué</li>
+        <li>C'est ensuite que le closer remplit le <strong>Typeform vente</strong></li>
+      </ul>
+      <div class="warn">⚠️ Greenbull est certifié Qualiopi et fait l'objet de contrôles. Le contrat doit impérativement être signé au moment du paiement.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">14</span>
+      <span class="faq-qtext">Comment ça se passe pour les acomptes ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <div class="warn">⚠️ Un acompte n'est pas une vente validée. Le client ne reçoit aucun accès tant que l'acompte n'est pas régularisé.</div>
+      <br>
+      <strong>📋 Étape 1 — Lors de l'acompte</strong>
+      <ul>
+        <li>Pas de contrat à envoyer à ce stade</li>
+        <li>Le closer remplit le <strong>Typeform acomptes</strong></li>
+        <li>Le client dispose de <strong>15 jours maximum</strong> pour régulariser</li>
+        <li>Tant que l'acompte n'est pas régularisé : ❌ pas d'accès ❌ pas d'onboarding ❌ vente non validée</li>
+      </ul>
+      <strong>✅ Étape 2 — Lors de la régularisation</strong>
+      <ul>
+        <li>Un <strong>code de réduction</strong> est fourni au client pour déduire le montant de l'acompte</li>
+        <li>Reprendre exactement le même process qu'une vente normale</li>
+      </ul>
+      <div class="tip">💡 Suivre de près la date de régularisation — c'est le closer qui est responsable de relancer.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">15</span>
+      <span class="faq-qtext">Quand est-ce que les accès sont envoyés au client ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <strong>💳 Paiement par carte bancaire</strong>
+      <ul>
+        <li>✅ Typeform vente reçu en interne</li>
+        <li>✅ Contrat bien signé</li>
+        <li>✅ Paiement confirmé de notre côté</li>
+      </ul>
+      <strong>🏦 Paiement par virement</strong>
+      <ul>
+        <li>Les accès sont envoyés dans les <strong>72 heures</strong> après réception de :</li>
+        <li>✅ Capture d'écran du virement reçue</li>
+        <li>✅ Contrat bien signé</li>
+      </ul>
+      <div class="tip">💡 Tant que l'une de ces conditions n'est pas remplie, les accès ne sont pas envoyés.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">16</span>
+      <span class="faq-qtext">Qu'en est-il des accès pour les membres Duo ou Trio ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Pour les offres Duo et Trio, seul le premier bénéficiaire reçoit ses accès lors de la validation de la vente.
+      <ul>
+        <li>Les accès du <strong>2ème et 3ème bénéficiaire</strong> sont envoyés lors de l'appel d'onboarding</li>
+        <li>Pendant cet appel, on demande les adresses mail des autres bénéficiaires</li>
+      </ul>
+      <div class="warn">⚠️ Ne pas promettre des accès immédiats aux co-bénéficiaires avant l'onboarding.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">17</span>
+      <span class="faq-qtext">Comment suivre mes ventes et qui contacter en cas de problème ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Tu as accès à un <strong>suivi des ventes en temps réel</strong> qui affiche l'état de chaque vente :
+      <ul>
+        <li>Statut du contrat (signé / en attente)</li>
+        <li>Statut du paiement (reçu / en attente)</li>
+        <li>Statut des accès (envoyés / en attente)</li>
+        <li>Éventuelles anomalies à corriger</li>
+      </ul>
+      <div class="warn">⚠️ Les acomptes n'apparaissent pas dans ce suivi — ils ont leur propre suivi.</div>
+      Les managers consultent ce tableau <strong>chaque jour</strong> et remontent les problématiques. Si tu constates toi-même une anomalie, contacte immédiatement le manager référent.
+    </div>
+  </div>
+
+  <div class="group-header">👤 Côté client</div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">18</span>
+      <span class="faq-qtext">Que faire si un prospect ne se présente pas au rendez-vous (no-show) ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Un no-show ne signifie pas que le prospect n'est plus intéressé — il faut relancer rapidement :
+      <ul>
+        <li><strong>Dans les 15 min suivant le RDV manqué</strong> : SMS ou appel Ringover pour proposer un nouveau créneau</li>
+        <li><strong>J+1</strong> : seconde relance si pas de réponse</li>
+        <li><strong>J+3</strong> : dernière tentative avant de classer le prospect en "à relancer plus tard"</li>
+      </ul>
+      <div class="tip">💡 Un message humain et rapide après un no-show convertit bien : <em>"Bonjour [prénom], je viens de vous attendre sur notre appel — pas de souci, ça arrive ! Vous êtes disponible demain à [heure] ?"</em></div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">19</span>
+      <span class="faq-qtext">Les acomptes sont-ils remboursables ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Oui, les acomptes sont remboursables.
+      <div class="warn">⚠️ Ne jamais mentionner spontanément le caractère remboursable au client — uniquement si la question est posée directement.</div>
+      <ul>
+        <li>Un acompte reste un <strong>engagement</strong> de la part du client</li>
+        <li>Ne pas proposer un acompte à quelqu'un qui montre des signes de vouloir se rétracter</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">20</span>
+      <span class="faq-qtext">Est-ce qu'il y a un délai de rétractation ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Oui, le client dispose d'un délai légal de <strong>14 jours</strong> pour se rétracter après la vente.
+      <ul>
+        <li>C'est pourquoi il est essentiel de rester en contact avec le client une fois ses accès reçus</li>
+        <li>Prendre des nouvelles, s'assurer qu'il est bien connecté et qu'il commence à explorer la plateforme</li>
+        <li>Si le client exprime un doute ou une question après la vente → contacter les managers en urgence</li>
+      </ul>
+      <div class="tip">💡 Un client bien onboardé et accompagné dans les 14 premiers jours ne rétracte pas.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">21</span>
+      <span class="faq-qtext">Quelles sont les dates et le lieu de la journée d'intégration ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      La journée d'intégration est prévue le <strong>5 juin à Nice</strong>.
+      <div class="warn">⚠️ Ne mentionner que la date du 5 juin — ne pas évoquer d'autres dates. Si la journée est complète, d'autres disponibilités pourront être proposées, mais uniquement à ce moment-là.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ T4 : GESTION DES OBJECTIONS ══ -->
+<div class="section" id="t4">
+  <div class="section-header">
+    <div class="section-icon" style="background:#E8EAF6">🛡</div>
+    <div class="section-title">Gestion des objections</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">01</span>
+      <span class="faq-qtext">"Je dois réfléchir"</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a"><em>"Je comprends totalement — c'est une décision importante. Pour vous aider à réfléchir dans la bonne direction, dites-moi : qu'est-ce qui vous semble encore flou ou qui vous fait hésiter ?"</em> L'objectif est de transformer le "je réfléchis" en une objection concrète que tu peux traiter. Le "je réfléchis" seul ne se traite pas — c'est toujours la couverture d'une vraie question.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">02</span>
+      <span class="faq-qtext">"Je dois en parler à ma femme / mon mari"</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a"><em>"Complètement normal — les projets immobiliers ça se décide à deux. Qu'est-ce qui vous semble être le point le plus important à lui présenter ? Et si je vous propose qu'on organise un appel à trois pour répondre à toutes ses questions en direct — ça vous évite de devoir tout réexpliquer ?"</em> Propose toujours un appel à trois plutôt qu'une "réflexion en solo".</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">03</span>
+      <span class="faq-qtext">"Ce n'est pas le bon moment"</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a"><em>"Je vous entends. Quand vous dites ce n'est pas le bon moment — c'est plutôt une question de timing personnel ou c'est que certains éléments ne sont pas encore réunis de votre côté ?"</em> Identifier la vraie cause. Si c'est financier → aborder les options de paiement. Si c'est une question de disponibilité → montrer que l'accompagnement s'adapte. Si c'est de la peur → revenir sur les garanties et les profils similaires qui ont réussi.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">04</span>
+      <span class="faq-qtext">"Je veux d'abord tester seul"</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a"><em>"Tester seul, ça veut dire quoi concrètement pour vous ? Trouver un bien, faire une offre, obtenir un financement ? Parce que l'expérience des membres qui ont essayé seuls avant de nous rejoindre, c'est que le premier blocage arrive souvent là où ils ne l'attendaient pas. Et une erreur sur une opération MDB, ça peut coûter 30, 50, 100 000 €. C'est vraiment le moment de faire des essais-erreurs ?"</em></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">05</span>
+      <span class="faq-qtext">"J'ai déjà une formation immobilière"</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a"><em>"Super — ça veut dire que vous avez déjà les bases. Ce que Greenbull apporte en plus, ce n'est pas une formation supplémentaire — c'est le réseau, le financement garanti et le mentor local. Avec votre formation actuelle, avez-vous déjà finalisé une opération ? Trouvé un financement bancaire sur du MDB ?"</em> La formation sans réseau ni financement ne suffit pas — c'est l'argument central.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">06</span>
+      <span class="faq-qtext">"C'est trop beau pour être vrai"</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a"><em>"Je comprends ce scepticisme — et c'est même sain d'avoir ce réflexe. Ce qui rend ça crédible, ce ne sont pas nos promesses — ce sont les résultats concrets de nos membres. La question c'est : qu'est-ce qui vous permettrait, vous, de distinguer une promesse creuse d'un accompagnement qui fonctionne ?"</em> Renvoyer vers les preuves concrètes, pas vers la défense de l'offre.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">07</span>
+      <span class="faq-qtext">"J'ai peur de me faire arnaquer"</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <em>"Votre vigilance est totalement légitime — il y a beaucoup d'arnaques dans l'immo et sur internet en général. Je comprends cette prudence."</em>
+      <br><br>
+      Ce qui différencie Greenbull MDB :
+      <ul>
+        <li><strong>Nous avons des bureaux physiques</strong> — Greenbull Campus est une société avec des locaux en présentiel</li>
+        <li><strong>Un contrat signé avec des garanties précises</strong></li>
+        <li><strong>Une communauté de 1 500+ membres actifs</strong></li>
+        <li><strong>Des mentors joignables</strong></li>
+      </ul>
+      <div class="tip">💡 Proposer systématiquement de venir nous rencontrer sur place — c'est souvent le meilleur argument contre la peur d'arnaque.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">08</span>
+      <span class="faq-qtext">"Je n'ai jamais fait d'immobilier"</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a"><em>"C'est exactement le profil pour lequel l'Incubateur a été conçu. Maxime MIUS, un de nos mentors à Annecy, est un ancien militaire qui est parti de zéro — sans réseau, sans expérience. Il a réalisé ses premières opérations dans les 12 mois. La formation et le mentor sont là précisément pour que votre absence d'expérience ne soit pas un frein."</em></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">09</span>
+      <span class="faq-qtext">"Je suis salarié, est-ce compatible ?"</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a"><em>"Absolument — la majorité de nos membres ont commencé leur première opération en étant encore salariés. Joffrey BLAISOT, mentor dans les Hauts-de-France, travaille encore partiellement en centrale nucléaire tout en menant plusieurs opérations MDB. L'accompagnement s'adapte à votre rythme. Combien d'heures par semaine pourriez-vous y consacrer ?"</em></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">10</span>
+      <span class="faq-qtext">"Je n'ai que 20 000 € d'apport — il ne m'en restera rien"</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a"><em>"C'est une vraie question. Deux points : d'abord, le MDB peut se faire sans apport ou avec très peu — Loïc DEGLI INNOCENTI, mentor à Grasse, s'est spécialisé dans des opérations sans apport. Ensuite, la question n'est pas combien vous avez aujourd'hui — c'est combien ça va vous coûter si vous ratez votre première opération seul. Un accompagnement à ce stade, c'est une assurance."</em></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">11</span>
+      <span class="faq-qtext">"Pourquoi vous ne gardez pas vos meilleurs deals pour vous ?"</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a"><em>"Bonne question. Greenbull n'est pas un marchand de biens — c'est un incubateur. Le modèle économique est l'accompagnement des membres, pas la spéculation. Les deals off-market transitent via le réseau des ambassadeurs et des mentors — il y en a bien plus que Greenbull ne peut en traiter seul. Les partager aux membres, c'est ce qui fait tourner l'écosystème."</em></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">12</span>
+      <span class="faq-qtext">"Et si je ne valide aucun projet viable pendant l'accompagnement ?"</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a"><em>"C'est la question que tout le monde se pose avant de commencer — et c'est exactement pour ça que le Comité Projet existe. Il ne valide pas à votre place, il vous aide à construire des dossiers solides et à éviter les mauvais projets. La vraie question c'est : si dans 12 mois vous n'avez toujours pas avancé — c'est quoi le coût pour vous ?"</em> Retourner vers le coût de l'inaction.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">13</span>
+      <span class="faq-qtext">"C'est trop cher" / "Je n'ai pas le budget"</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <em>"Je comprends totalement — c'est une somme importante et c'est normal de se poser cette question. On va regarder ça ensemble."</em>
+      <br><br>
+      Ne pas lâcher sur cette objection sans avoir exploré toutes les options. Dans l'ordre :
+      <br><br>
+      <strong>1. Évaluer les fonds disponibles</strong>
+      <ul>
+        <li>Quel est son capital disponible aujourd'hui ?</li>
+        <li>A-t-il de l'épargne, des placements, un PEL, une assurance-vie ?</li>
+        <li>Y a-t-il des fonds qui peuvent être mobilisés à court terme ?</li>
+      </ul>
+      <strong>2. Explorer les aides extérieures (love money)</strong>
+      <ul>
+        <li>Y a-t-il des proches (famille, amis) qui pourraient l'aider ou co-investir ?</li>
+        <li>Le love money est souvent une ressource sous-estimée</li>
+      </ul>
+      <strong>3. Envisager un prêt bancaire</strong>
+      <ul>
+        <li>Il est possible de contracter un prêt personnel pour se lancer</li>
+        <li>Le coût du prêt est souvent largement amorti par la première opération réalisée</li>
+      </ul>
+      <strong>4. Explorer les modalités de paiement</strong>
+      <ul>
+        <li>Des facilités de paiement sont disponibles — voir avec le manager</li>
+        <li>Paiement en plusieurs fois, acompte, etc.</li>
+      </ul>
+      <strong>5. Si vraiment rien n'est possible → R2 + Accélérateur</strong>
+      <ul>
+        <li>Si après avoir exploré toutes ces options, rien n'est faisable pour l'Incubateur aujourd'hui → ne pas forcer</li>
+        <li>Proposer un R2 et envisager l'Accélérateur comme porte d'entrée</li>
+      </ul>
+      <div class="warn">⚠️ L'objection prix est souvent une objection de surface. Avant de conclure que le prospect "n'a pas les moyens", s'assurer qu'on a bien exploré toutes les options avec lui.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ T5 : ARGUMENTS DE VENTE ══ -->
+<div class="section" id="t5">
+  <div class="section-header">
+    <div class="section-icon" style="background:#FFF9C4">⭐</div>
+    <div class="section-title">Arguments de vente</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">01</span>
+      <span class="faq-qtext">Quel est l'avantage de faire du marchand de biens plutôt que du locatif ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Le locatif et le MDB sont deux stratégies très différentes. Voici ce qui rend le MDB particulièrement attractif :
+      <ul>
+        <li><strong>Des gains concentrés dans le temps</strong> — en locatif, on construit un patrimoine sur 20-30 ans. En MDB, une seule opération bien menée peut générer 30 000, 80 000, 200 000 € de marge nette en quelques mois.</li>
+        <li><strong>Pas de gestion locataire</strong> — pas d'impayés, pas de turnover, pas de dégradations à gérer au quotidien.</li>
+        <li><strong>Un effet de levier plus rapide</strong> — chaque opération génère du cash réinvestissable immédiatement dans la suivante.</li>
+        <li><strong>Accessible sans gros patrimoine initial</strong> — on peut faire du MDB avec peu d'apport si le projet est solide.</li>
+        <li><strong>Un marché de niches</strong> — divisions parcellaires, découpes d'immeubles, permis d'aménager.</li>
+      </ul>
+      <div class="tip">💡 Le locatif construit la richesse lentement. Le MDB accélère la création de valeur.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">02</span>
+      <span class="faq-qtext">Sans Greenbull, quelles ressources un débutant a-t-il réellement ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Uniquement des ressources génériques : YouTube, forums, formations théoriques sans suivi. Aucune relation bancaire, aucun réseau off-market, aucun mentor local, aucun Comité Projet pour valider les opérations. Le débutant seul doit tout apprendre par essais-erreurs — et les erreurs en MDB coûtent des dizaines de milliers d'euros.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">03</span>
+      <span class="faq-qtext">Quelles sont les difficultés rencontrées quand on se lance seul en MDB ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      Se lancer seul en MDB expose à des blocages précis que la quasi-totalité des débutants rencontrent :
+      <ul>
+        <li><strong>Le refus bancaire systématique</strong> — sans historique MDB et sans réseau, les banques refusent.</li>
+        <li><strong>L'absence de réseau</strong> — les meilleures opportunités ne sont jamais sur Leboncoin.</li>
+        <li><strong>Sans argent, sans réseau — pas de levier</strong></li>
+        <li><strong>Les erreurs d'analyse coûteuses</strong></li>
+        <li><strong>La paralysie par l'analyse</strong></li>
+        <li><strong>La complexité juridique et fiscale</strong></li>
+      </ul>
+      <div class="warn">⚠️ Ce n'est pas une question de compétence ou d'intelligence. C'est une question de réseau, de méthode et d'expérience.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">04</span>
+      <span class="faq-qtext">Quel est le taux d'échec des débutants sans structure ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      La grande majorité des débutants qui se lancent seuls n'atteignent jamais leur première opération — soit par blocage bancaire, soit par manque de réseau pour trouver des biens avec marge, soit par erreur d'analyse.
+      <br><br>
+      Et pour ceux qui tentent malgré tout une première opération et échouent : une grande partie abandonne définitivement après ce premier échec.
+      <div class="warn">⚠️ Le MDB est un métier où la première erreur peut dépasser la rentabilité de plusieurs années d'économies.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">05</span>
+      <span class="faq-qtext">J'ai déjà eu un refus bancaire. Comment Greenbull MDB change la donne ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <strong>1. Le projet a été audité par des professionnels</strong>
+      <ul>
+        <li>Le Comité de Projet est composé d'experts MDB avec des décennies d'expérience.</li>
+        <li>Les banques font la différence entre un projet monté seul et un projet audité par un comité d'experts.</li>
+      </ul>
+      <strong>2. Le membre est certifié Qualiopi</strong>
+      <ul>
+        <li>La formation Greenbull MDB est certifiée Qualiopi</li>
+        <li>Pour une banque, un client formé est un gage de sérieux et de compétence</li>
+      </ul>
+      <strong>3. C'est une demande professionnelle, pas personnelle</strong>
+      <ul>
+        <li>Un MDB demande un financement à titre <strong>professionnel</strong></li>
+      </ul>
+      <strong>4. Des relations bancaires établies</strong>
+      <ul>
+        <li>Greenbull MDB a construit des relations durables avec des banques partenaires (Ceixa)</li>
+      </ul>
+      <div class="tip">💡 Ce n'est pas la même demande, ni le même dossier, ni le même interlocuteur.</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">06</span>
+      <span class="faq-qtext">Combien coûte en moyenne une erreur sur un projet MDB mal préparé ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Une erreur sur un projet MDB (mauvaise évaluation, vice caché non détecté, problème juridique, refus bancaire en cours d'opération) peut coûter entre 20 000 € et 100 000 € selon la taille du projet. Le coût d'un accompagnement structuré est incomparablement inférieur au coût d'une seule erreur évitable.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">07</span>
+      <span class="faq-qtext">Avez-vous des exemples de projets réussis récents ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">
+      <ul>
+        <li><strong>Anthony CARON (HdF)</strong> : détachement terrain + réno → 83 900 € de marge nette (64%) — trophée Greenbull de la plus rentable</li>
+        <li><strong>Jérémy KOLODZIEJCZYK (Pau)</strong> : 2,6 M€ de CA depuis 2022, 485 K€ de marge, 11 opérations</li>
+        <li><strong>Hélène BERTELOT (Lyon)</strong> : 1ère opération → 200 000 € de gain en 6 mois</li>
+        <li><strong>Loïc DEGLI INNOCENTI (Grasse)</strong> : 210 K€ de marge sur 2 OP clôturées, sans apport</li>
+        <li><strong>Valéry PIERRE (Bretagne)</strong> : 70+ biens acquis en 2 ans après reconversion d'ex-pompier</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">08</span>
+      <span class="faq-qtext">Des profils similaires au mien ont-ils réussi ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Oui — la communauté compte des ex-salariés, des entrepreneurs, des militaires, des opticiens, des ingénieurs, des comptables, des pompiers. Identifie le profil du prospect et cherche le mentor ou le témoignage le plus proche — c'est ton meilleur argument de réassurance.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">09</span>
+      <span class="faq-qtext">Combien de temps en moyenne pour réaliser un premier projet ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Entre 6 et 18 mois selon le profil, la région et la disponibilité du membre. Certains membres (Doers, profils actifs avec capital disponible) ont signé leur première promesse en moins de 6 mois. D'autres prennent plus de temps — l'accompagnement ne s'arrête pas à la date contractuelle si le projet est en cours.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">10</span>
+      <span class="faq-qtext">Quel est le plus gros projet réalisé par un membre ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Alex PLUQUET (IDF) mène actuellement 5 opérations en association avec une valeur d'achat totale de 4 M€ et un CA attendu de 8 M€. Jérémy KOLODZIEJCZYK cumule 2,6 M€ de CA depuis 2022. Yann FALCHERO (PACA) a généré 3,5 M€ de CA sur 7 opérations.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">11</span>
+      <span class="faq-qtext">Quel est le projet le plus simple réalisé par un débutant ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Damien BOURGUIGNON (Perpignan) : remise en état d'une maison sans travaux majeurs → 55 000 € de marge. Grégory PERROTTE (Orléans) : flip d'appartements studio/T3 avec ou sans travaux sur Orléans — 8 opérations en parallèle du salariat. Le MDB ne se résume pas aux grands ensembles immobiliers.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-num">12</span>
+      <span class="faq-qtext">Comment utiliser les témoignages pendant l'appel sans que ça semble forcé ?</span>
+      <span class="faq-arrow">›</span>
+    </div>
+    <div class="faq-a">Ne les place pas en liste — intègre-les dans la conversation. <em>"D'ailleurs, on a un mentor à Annecy qui avait exactement votre situation — militaire, zéro réseau, zéro expérience. Il a réalisé ses premières opérations en moins d'un an."</em> Le témoignage doit répondre à l'objection ou au profil du prospect — pas être récité comme un catalogue.</div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<div class="footer">
+  GreenBull Campus · Ressource interne — Challenge MDB · Avril 2026 · <strong>Confidentiel</strong>
+</div>
+
+<script>
+function toggle(btn) {
+  var item = btn.parentElement;
+  var wasOpen = item.classList.contains('open');
+  item.classList.toggle('open', !wasOpen);
+}
+
+function filterFAQ() {
+  var q = document.getElementById('searchInput').value.toLowerCase();
+  var items = document.querySelectorAll('.faq-item');
+  var sections = document.querySelectorAll('.section');
+  var any = false;
+  items.forEach(function(item) {
+    var text = item.textContent.toLowerCase();
+    var match = !q || text.includes(q);
+    item.style.display = match ? '' : 'none';
+    if (match) any = true;
+  });
+  sections.forEach(function(s) {
+    var visible = Array.from(s.querySelectorAll('.faq-item')).some(function(i){ return i.style.display !== 'none'; });
+    s.style.display = visible ? '' : 'none';
+  });
+  document.getElementById('noResults').style.display = (q && !any) ? '' : 'none';
+  if (q) {
+    items.forEach(function(item) {
+      if(item.style.display !== 'none') item.classList.add('open');
+    });
+  } else {
+    items.forEach(function(item){ item.classList.remove('open'); });
+  }
+}
+</script>
+</body>
+</html>
