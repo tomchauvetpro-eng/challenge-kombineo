@@ -386,11 +386,8 @@ export default function Home() {
                                 {d.members}
                               </div>
                               <div className="min-w-0 flex-1">
-                                <div className="text-sm font-semibold text-[#0F1923] leading-tight truncate">
+                                <div className="text-sm font-semibold text-[#0F1923] leading-tight">
                                   {d.name}
-                                </div>
-                                <div className="text-[10px] text-gray-400 mt-0.5">
-                                  {d.code} · {d.members > 1 ? "membres" : "membre"}
                                 </div>
                               </div>
                             </div>
