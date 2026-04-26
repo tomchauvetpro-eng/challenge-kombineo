@@ -368,23 +368,30 @@ export default function Home() {
               ) : (
                 (() => {
                   const depts = departmentsByRegion[selected] ?? [];
+                  // Sort departments by member count descending for clarity
+                  const sorted = [...depts].sort((a, b) => b.members - a.members);
                   return (
                     <div>
                       <div className="text-xs uppercase tracking-wider text-gray-500 mb-3 font-semibold">
-                        Départements ({depts.length})
+                        Répartition par département ({depts.length})
                       </div>
                       {depts.length > 0 ? (
                         <div className="grid gap-2 grid-cols-2 sm:grid-cols-3">
-                          {depts.map((d) => (
+                          {sorted.map((d) => (
                             <div
                               key={d.code}
                               className="flex items-center gap-3 bg-white border border-gray-200 rounded-lg p-3 hover:border-[#1DB954] hover:shadow-sm transition"
                             >
-                              <div className="flex-none w-10 h-10 rounded-full bg-[#1DB954]/10 text-[#1DB954] font-bold text-sm flex items-center justify-center">
-                                {d.code}
+                              <div className="flex-none w-10 h-10 rounded-full bg-[#1DB954]/10 text-[#1DB954] font-bold text-base flex items-center justify-center">
+                                {d.members}
                               </div>
-                              <div className="text-sm font-semibold text-[#0F1923] leading-tight">
-                                {d.name}
+                              <div className="min-w-0 flex-1">
+                                <div className="text-sm font-semibold text-[#0F1923] leading-tight truncate">
+                                  {d.name}
+                                </div>
+                                <div className="text-[10px] text-gray-400 mt-0.5">
+                                  {d.code} · {d.members > 1 ? "membres" : "membre"}
+                                </div>
                               </div>
                             </div>
                           ))}
